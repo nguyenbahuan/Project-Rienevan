@@ -1,0 +1,29 @@
+<div class="container">
+  <a type="button" class="btn btn-primary" href="/test/create">Thêm mới</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Age</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each test}}
+        <tr>
+          <th scope="row">{{@index}}</th>
+          <td>{{this.firstName}}</td>
+          <td>{{this.lastName}}</td>
+          <td>{{this.age}}</td>
+          <td>
+            <a type="button" class="btn btn-primary" href="">Sửa</a>
+            <a type="button" class="btn btn-danger" href="">Xóa</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+</div>
