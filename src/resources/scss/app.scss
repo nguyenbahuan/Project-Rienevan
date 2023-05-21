@@ -24,6 +24,7 @@
         max-height: 30px;
         width: auto;
       }
+
       .header-main {
         .menu-main {
           display: flex;
@@ -33,9 +34,51 @@
           padding: 0;
 
           .menu-item {
-            padding: 4px 8px;
+            a {
+              font-weight: 300;
+              display: block;
+            }
+            padding: 0 12px;
             cursor: pointer;
             border-bottom: 3px solid #fff;
+            .sub-menu-lv2 {
+              position: absolute;
+              z-index: 2;
+              overflow: hidden;
+              top: 48px;
+              left: 0;
+              right: 0;
+              background: white;
+              padding: 40px;
+
+              transform: scaleY(0);
+              transform-origin: top center;
+              opacity: 0;
+              visibility: hidden;
+              transition: transform 0.1s ease, opacity 0ms linear 0.1s,
+                visibility 0ms linear 0.1s;
+              ul {
+                display: flex;
+                justify-content: center;
+                li {
+                  padding: 20px;
+                }
+                a {
+                  color: #303030;
+                }
+                a:hover {
+                  color: #ccc;
+                }
+              }
+            }
+          }
+          .menu-lv1:hover {
+            .sub-menu-lv2 {
+              transform: scaleY(1);
+              opacity: 1;
+              visibility: visible;
+              transition: transform 0.25s ease, opacity 0ms, visibility 0ms;
+            }
           }
           .menu-item.active {
             border-bottom: 3px solid #000;
@@ -43,7 +86,7 @@
           .menu-item:hover {
             border-bottom: 3px solid #000;
           }
-          .menu-item:hover a {
+          .menu-item a:hover {
             color: #ffc107;
           }
         }
