@@ -17,6 +17,21 @@
         {{{body}}}
       </main>
       <footer>{{> footer}}</footer>
+      <script>
+        const search = document.querySelector('.search')
+        const formSearch = document.querySelector('.header-wrap-search')
+        const closeButton = document.querySelector('.close-search')
+        console.log(search)
+        closeButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          formSearch.style.visibility = 'hidden'
+        })
+
+        search.addEventListener('click', (e) => {
+          formSearch.style.visibility = 'visible'
+        } )
+        
+      </script>
   </body>
    
 </html>

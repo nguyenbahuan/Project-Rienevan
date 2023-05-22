@@ -9,9 +9,10 @@
         />
       </a>
     </div>
+
     <div class="header-main">
       <ul class="menu-main">
-        <li class="menu-item"><a href="" class="leading-[3rem]">Trang chủ</a></li>
+        <li class="menu-item"><a href="/" class="leading-[3rem]">Trang chủ</a></li>
         <li class="menu-item menu-lv1">
           <a href="" class="leading-[3rem]">Cửa hàng</a>
           <div class="sub-menu-lv2">
@@ -26,12 +27,69 @@
         <li class="menu-item"><a href="" class="leading-[3rem]">Hỗ trợ</a></li>
       </ul>
     </div>
+
+    <div class="header-wrap-search">
+      <div class="header-search">
+        <div class="search-box wpo-wrapper-search">
+          <form
+            action="/search"
+            class="searchform-product searchform-categoris ultimate-search"
+          >
+
+            <div class="search-input">
+              <input type="hidden" name="type" value="product" />
+              {{! <input
+                required=""
+                id="inputSearchAuto-3"
+                class="input-search"
+                name="q"
+                maxlength="40"
+                autocomplete="off"
+                type="text"
+                size="20"
+                placeholder="Tìm kiếm sản phẩm..."
+              /> }}
+              <div class="input-group mb-3 mt-3">
+                <input
+                  required=""
+                  id="inputSearchAuto-3"
+                  name="q"
+                  maxlength="40"
+                  autocomplete="off"
+                  size="20"
+                  type="text"
+                  class="form-control"
+                  placeholder="Tìm kiếm sản phẩm..."
+                />
+                <button type="submit" class="input-group-text">
+                  <i class="fa fa-magnifying-glass"></i>
+                </button>
+              </div>
+            </div>
+
+          </form>
+          <div
+            id="ajaxSearchResults-3"
+            class="smart-search-wrapper ajaxSearchResults"
+            style="display: block;"
+          >
+            <div class="resultsContent"></div>
+          </div>
+        </div>
+      </div>
+      <button class="close-search">
+        <i class="fa-regular fa-circle-xmark"></i>
+      </button>
+    </div>
+
     <div class="header-action">
-      <div class="header-acction-item">
-        <a href="" class="text-center flex flex-col text-[#ffc107] font-medium">
-          <span class="mb-1"><i class="fa fa-magnifying-glass"></i></span>
-          <span class="text-xs">Tìm kiếm</span>
-        </a>
+      <div
+        class="text-center flex flex-col text-[#ffc107] font-medium header-acction-item search"
+      >
+        {{! <a href="" class="text-center flex flex-col text-[#ffc107] font-medium"> }}
+        <span class="mb-1"><i class="fa fa-magnifying-glass"></i></span>
+        <span class="text-xs">Tìm kiếm</span>
+        {{! </a> }}
       </div>
       <div class="header-acction-item flex items-center">
         <a href="" class="text-center flex flex-col text-[#ffc107] font-medium">
