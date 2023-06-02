@@ -1,0 +1,53 @@
+<div class="mt-[100px]">
+  <div class="login-page">
+    <div class="form">
+      <div class="user-icon">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+      </div>
+      <form action="/account/singup" method="post">
+        <h1 class="login">ĐĂNG KÍ</h1>
+        <div class="input-user">
+          <input
+            id="username-login"
+            type="text"
+            name="username"
+            placeholder="Enter username"
+          />
+        </div>
+        <div class="input-pw">
+          <input
+            id="password-login"
+            type="password"
+            name="password"
+            placeholder="Enter password"
+          />
+        </div>
+        {{! <div class="input-pw">
+          <input
+            id="password-login"
+            type="password"
+            name="confirmpassword"
+            placeholder="Confirm password"
+          />
+        </div> }}
+        <div class="input-user">
+          <input
+            id="username-login"
+            type="text"
+            name="email"
+            placeholder="Enter email"
+          />
+
+        </div>
+        <input type="hidden" name="roleId" value="4" />
+        <input id="btn-login" type="submit" name="" value="ĐĂNG KÍ" />
+        <div class="message">
+          <a href="#">Quên mật khẩu? </a>
+          <a href="/account/login">Đăng nhập </a>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

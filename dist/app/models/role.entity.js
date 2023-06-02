@@ -9,31 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Test = void 0;
+exports.Roles = void 0;
 const typeorm_1 = require("typeorm");
-let Test = class Test {
+const user_entity_1 = require("./user.entity");
+let Roles = class Roles {
     id;
-    firstName;
-    lastName;
-    age;
+    role;
+    user;
 };
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
-    __metadata("design:type", Object)
-], Test.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Test.prototype, "firstName", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Test.prototype, "lastName", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Test.prototype, "age", void 0);
-Test = __decorate([
+], Roles.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Roles.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => user_entity_1.User, (user) => user.role),
+    __metadata("design:type", Array)
+], Roles.prototype, "user", void 0);
+Roles = __decorate([
     (0, typeorm_1.Entity)()
-], Test);
-exports.Test = Test;
+], Roles);
+exports.Roles = Roles;

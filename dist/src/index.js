@@ -7,8 +7,10 @@ const express_1 = __importDefault(require("express"));
 const express_handlebars_1 = require("express-handlebars");
 const db_1 = __importDefault(require("./config/db"));
 const path_1 = __importDefault(require("path"));
+const dotenv_1 = __importDefault(require("dotenv"));
 // import { fileURLToPath } from "url";
 const routers_1 = __importDefault(require("./routers"));
+dotenv_1.default.config();
 //express
 const app = (0, express_1.default)();
 app.use(express_1.default.urlencoded({
@@ -29,10 +31,11 @@ app.engine(".hbs", (0, express_handlebars_1.engine)({
     },
 }));
 app.set("view engine", ".hbs");
-app.set("views", path_1.default.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views"));
+app.set("views", path_1.default.join(__dirname, "views"));
 console.log("hee", path_1.default.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views"));
 //routers
 (0, routers_1.default)(app);
+console.log("???????????", __dirname);
 //database
 db_1.default.initialize()
     .then(() => console.log("thành công"))

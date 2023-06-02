@@ -3,9 +3,11 @@ import { engine } from "express-handlebars";
 import MysqlDataSource from "./config/db";
 import path from "path";
 import morgan from "morgan";
+import dotenv from "dotenv";
 // import { fileURLToPath } from "url";
 import router from "./routers";
 
+dotenv.config();
 //express
 const app: Express = express();
 app.use(
@@ -19,8 +21,7 @@ app.use(express.json());
 //post 3000
 const PORT = 3000;
 //path to file
-app.use(express.static("D:\\HUANBA\\TypeScript\\project-type\\src\\public"));
-
+app.use(express.static(path.resolve("src/public")));
 app.engine(
   ".hbs",
   engine({
@@ -33,17 +34,11 @@ app.engine(
   })
 );
 app.set("view engine", ".hbs");
-app.set(
-  "views",
-  path.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views")
-);
-console.log(
-  "hee",
-  path.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views")
-);
+app.set("views", path.join(path.resolve("./src/resources"), "views"));
+// console.log("hee", path.join("./", "views"));
 //routers
 router(app);
-
+console.log("???????????", path.resolve("src/public"));
 //database
 MysqlDataSource.initialize()
   .then(() => console.log("thành công"))
