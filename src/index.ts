@@ -19,28 +19,19 @@ app.use(express.json());
 //post 3000
 const PORT = 3000;
 //path to file
-app.use(express.static("D:\\HUANBA\\TypeScript\\project-type\\src\\public"));
+app.use(express.static("D:\\TypeScript\\Project\\Project-Rienevan\\src\\public"));
 
-app.engine(
-  ".hbs",
-  engine({
-    extname: ".hbs",
-    helpers: {
-      sum(a: number, b: number) {
-        return a + b;
-      },
-    },
-  })
-);
+app.get('/')
+app.engine('hbs',  engine({extname: '.hbs'}));
 app.set("view engine", ".hbs");
 app.set(
   "views",
-  path.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views")
+  path.join("D:\\TypeScript\\Project\\Project-Rienevan\\src\\resources\\views")
 );
-console.log(
-  "hee",
-  path.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views")
-);
+// console.log(
+//   "hee",
+//   path.join("D:\TypeScript\Project\Project-Rienevan\src\resources\views")
+// );
 //routers
 router(app);
 

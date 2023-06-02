@@ -19,18 +19,15 @@ app.use(express_1.default.json());
 //post 3000
 const PORT = 3000;
 //path to file
-app.use(express_1.default.static("D:\\HUANBA\\TypeScript\\project-type\\src\\public"));
-app.engine(".hbs", (0, express_handlebars_1.engine)({
-    extname: ".hbs",
-    helpers: {
-        sum(a, b) {
-            return a + b;
-        },
-    },
-}));
+app.use(express_1.default.static("D:\\TypeScript\\Project\\Project-Rienevan\\src\\public"));
+app.get('/');
+app.engine('hbs', (0, express_handlebars_1.engine)({ extname: '.hbs' }));
 app.set("view engine", ".hbs");
-app.set("views", path_1.default.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views"));
-console.log("hee", path_1.default.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views"));
+app.set("views", path_1.default.join("D:\\TypeScript\\Project\\Project-Rienevan\\src\\resources\\views"));
+// console.log(
+//   "hee",
+//   path.join("D:\TypeScript\Project\Project-Rienevan\src\resources\views")
+// );
 //routers
 (0, routers_1.default)(app);
 //database
