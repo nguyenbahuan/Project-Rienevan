@@ -19,7 +19,7 @@ app.use(express.json());
 //post 3000
 const PORT = 3000;
 //path to file
-app.use(express.static("D:\\HUANBA\\TypeScript\\project-type\\src\\public"));
+app.use(express.static("D:\\bui_minh_hai\\Project-Rienevan\\src\\public"));
 
 app.engine(
   ".hbs",
@@ -35,12 +35,13 @@ app.engine(
 app.set("view engine", ".hbs");
 app.set(
   "views",
-  path.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views")
+  path.join("D:\\bui_minh_hai\\Project-Rienevan\\src\\resources\\views")
 );
-console.log(
-  "hee",
-  path.join("D:\\HUANBA\\TypeScript\\project-type\\src\\resources\\views")
-);
+console.log("path:", path.join(__dirname));
+// console.log(
+//   "hee",
+//   path.join("D:\\bui_minh_hai\\Project-Rienevan\\src\\resources\\views")
+// );
 //routers
 router(app);
 
