@@ -12,4 +12,17 @@ router.get("/singup", (req: Request, res: Response) => {
   res.render("account/singup");
 });
 
+// router.get("/admin", (req: Request, res: Response) => {
+//   res.render("admin/admin", { title: "ADMIN", layout: "admin" });
+// });
+// router.get("/admin/products/add-product", (req: Request, res: Response) => {
+//   res.render("admin/form-add-product", { title: "add", layout: "admin" });
+// });
+
+// router.get("/admin/products", (req: Request, res: Response) => {
+//   res.render("admin/table-data-product", {
+//     title: "add Product",
+//     layout: "admin",
+//   });
+// });
 export default router;

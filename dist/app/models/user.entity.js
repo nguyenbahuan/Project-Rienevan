@@ -16,6 +16,7 @@ exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const role_entity_1 = require("./role.entity");
+const bills_entity_1 = require("./bills.entity");
 let User = class User extends typeorm_1.BaseEntity {
     id;
     username;
@@ -24,11 +25,8 @@ let User = class User extends typeorm_1.BaseEntity {
     async hashPassword() {
         this.password = await bcryptjs_1.default.hash(this.password, 10);
     }
-    // @BeforeInsert()
-    // setDefaultValues() {
-    //   if (!this.role) this.role = Roles.;
-    // }
     role;
+    bill;
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -57,14 +55,13 @@ __decorate([
     (0, typeorm_1.JoinColumn)({
         name: "roleId",
         referencedColumnName: "id",
-    })
-    // @BeforeInsert()
-    // setDefaultValues() {
-    //   if (!this.role) this.role = Roles.;
-    // }
-    ,
+    }),
     __metadata("design:type", role_entity_1.Roles)
 ], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => bills_entity_1.Bills, (bill) => bill.user),
+    __metadata("design:type", bills_entity_1.Bills)
+], User.prototype, "bill", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

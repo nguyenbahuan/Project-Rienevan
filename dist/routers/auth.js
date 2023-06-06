@@ -5,8 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const auth_controller_1 = __importDefault(require("../app/controllers/auth.controller"));
+const passport_1 = __importDefault(require("passport"));
 const router = (0, express_1.Router)();
-router.post("/login", auth_controller_1.default.login);
+router.post("/login", passport_1.default.authenticate("local", { failureRedirect: "/" }), auth_controller_1.default.login);
 router.get("/login", (req, res) => {
     res.render("account/login");
 });

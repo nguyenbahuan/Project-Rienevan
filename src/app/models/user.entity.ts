@@ -5,6 +5,7 @@ import {
   EntitySchema,
   PrimaryColumn,
   ManyToOne,
+  OneToMany,
   BeforeInsert,
   JoinColumn,
   BaseEntity,
@@ -12,6 +13,7 @@ import {
 import bcryptjs from "bcryptjs";
 import { Roles } from "./role.entity";
 import { type } from "os";
+import { Bills } from "./bills.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -37,9 +39,8 @@ export class User extends BaseEntity {
     name: "roleId",
     referencedColumnName: "id",
   })
-  // @BeforeInsert()
-  // setDefaultValues() {
-  //   if (!this.role) this.role = Roles.;
-  // }
   role: Roles;
+
+  @OneToMany(() => Bills, (bill) => bill.user)
+  bill: Bills;
 }
