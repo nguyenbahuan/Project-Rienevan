@@ -18,6 +18,9 @@ export class Products extends BaseEntity {
   name: string;
 
   @Column()
+  amout: number;
+
+  @Column()
   img: string;
 
   @Column()

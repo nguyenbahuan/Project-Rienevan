@@ -27,29 +27,33 @@
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Ảnh</th>
+                                    <th>Size</th>
                                     <th>Số lượng</th>
-                                    <th>Số lượng</th>
+                                    <th>Trạng thái</th>
                                     <th>Giá tiền</th>
                                     <th>Danh mục</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>71309005</td>
-                                    <td>Giày adidas</td>
-                                    <td><img src="/img-sanpham/theresa.jpg" alt="" width="100px;"></td>
-                                    <td>40</td>
+                              {{#each product}}
+                                   <tr>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.name}}</td>
+                                    <td><img src="/upload/{{this.img}}" alt="" width="100px;"></td>
+                                    <td>{{this.size}}</td>
+                                    <td>{{this.amout}}</td>
                                     <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>5.600.000 đ</td>
-                                    <td>Adidas</td>
-                                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                    <td>{{this.price}}</td>
+                                    <td>{{this.categoriesId}}</td>
+                                    <td><a href="/admin/products/delete/{{this.id}}" class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                             onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                                        </button>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                      data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+                                        </a>
+                                        <a href="/admin/products/update/{{this.id}}" class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                      data-target="#ModalUP"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
+                              {{/each}}
                             </tbody>
                         </table>
                     </div>
