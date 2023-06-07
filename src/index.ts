@@ -69,7 +69,7 @@ MysqlDataSource.initialize()
 //test upfiles
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    return cb(null, path.resolve("src/upload"));
+    return cb(null, path.resolve("src/public/upload"));
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + file.originalname;
@@ -82,7 +82,7 @@ app.get("/upload", (req, res) => {
 });
 app.post("/upload", upload.single("file-load"), (req, res) => {
   console.log(req.body);
-  console.log(req.file);
+  console.log("h///////////////////", req.file);
   res.send("thành công");
 });
 app.listen(PORT, () => {

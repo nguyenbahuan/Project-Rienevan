@@ -16,6 +16,7 @@ const detail_productsordered_entity_1 = require("./detail_productsordered.entity
 let Products = class Products extends typeorm_1.BaseEntity {
     id;
     name;
+    amout;
     img;
     size;
     color;
@@ -34,6 +35,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Products.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Products.prototype, "amout", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
