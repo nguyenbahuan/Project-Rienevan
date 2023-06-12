@@ -6,6 +6,7 @@ import testRouter from "./test";
 import authRouter from "./auth";
 import adminRouter from "./admin";
 import path from "path";
+import checkMiddlerWares from "../middlewares/middlewearAdmin";
 function router(app: any) {
   app.use("/admin", adminRouter);
   app.use("/account", authRouter);

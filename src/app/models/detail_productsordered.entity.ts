@@ -18,7 +18,7 @@ export class DetailsProduct extends BaseEntity {
   amout: number;
 
   @ManyToOne(() => Products, (product) => product.details)
-  product: Products[];
+  product: Products;
 
   @Column()
   created_at: Date;

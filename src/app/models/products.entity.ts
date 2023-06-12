@@ -41,9 +41,11 @@ export class Products extends BaseEntity {
   @Column()
   updated_at: Date;
 
-  @ManyToOne(() => Categories, (category) => category.product)
+  @ManyToOne(() => Categories, (category) => category.product, {
+    onUpdate: "CASCADE",
+  })
   categories: Categories;
 
   @OneToMany(() => DetailsProduct, (detailsProduct) => detailsProduct.product)
-  details: DetailsProduct;
+  details: DetailsProduct[];
 }

@@ -22,15 +22,38 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initialize = void 0;
 const LocalStrategy = require("passport-local").Strategy;
 const bcryptjs = __importStar(require("bcryptjs"));
 const user_entity_1 = require("../app/models/user.entity");
+const joi_1 = __importDefault(require("joi"));
 /// Định nghĩa chiến lược xác thực
 function initialize(passport) {
     passport.use(new LocalStrategy(async (username, password, cb) => {
         try {
+            const schema = joi_1.default.object({
+                username: joi_1.default
+                    .string()
+                    .required()
+                    .min(8)
+                    .max(30)
+                    .error(new Error("Username không hợp lệ")),
+                password: joi_1.default
+                    .string()
+                    .required()
+                    .min(8)
+                    .max(30)
+                    .error(new Error("Password không hợp lệ")),
+            });
+            const result = schema.validate({ username, password });
+            if (result.error) {
+                const errMessage = result.error.message;
+                return cb(null, false, { message: errMessage });
+            }
             // Tìm người dùng trong cơ sở dữ liệu
             const user = await user_entity_1.User.findOneBy({ username: username });
             // Kiểm tra xem người dùng có tồn tại không

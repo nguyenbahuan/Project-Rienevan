@@ -1,12 +1,32 @@
 const LocalStrategy = require("passport-local").Strategy;
 import * as bcryptjs from "bcryptjs";
 import { User } from "../app/models/user.entity";
-
+import joi from "joi";
 /// Định nghĩa chiến lược xác thực
+
 export function initialize(passport: any) {
   passport.use(
     new LocalStrategy(async (username: string, password: string, cb: any) => {
       try {
+        const schema = joi.object({
+          username: joi
+            .string()
+            .required()
+            .min(8)
+            .max(30)
+            .error(new Error("Username không hợp lệ")),
+          password: joi
+            .string()
+            .required()
+            .min(8)
+            .max(30)
+            .error(new Error("Password không hợp lệ")),
+        });
+        const result = schema.validate({ username, password });
+        if (result.error) {
+          const errMessage = result.error.message;
+          return cb(null, false, { message: errMessage });
+        }
         // Tìm người dùng trong cơ sở dữ liệu
         const user = await User.findOneBy({ username: username });
         // Kiểm tra xem người dùng có tồn tại không

@@ -29,7 +29,7 @@ __decorate([
 ], DetailsProduct.prototype, "amout", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => products_entity_1.Products, (product) => product.details),
-    __metadata("design:type", Array)
+    __metadata("design:type", products_entity_1.Products)
 ], DetailsProduct.prototype, "product", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

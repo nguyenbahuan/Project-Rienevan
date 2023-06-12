@@ -68,12 +68,14 @@ __decorate([
     __metadata("design:type", Date)
 ], Products.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => categories_entity_1.Categories, (category) => category.product),
+    (0, typeorm_1.ManyToOne)(() => categories_entity_1.Categories, (category) => category.product, {
+        onUpdate: "CASCADE",
+    }),
     __metadata("design:type", categories_entity_1.Categories)
 ], Products.prototype, "categories", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => detail_productsordered_entity_1.DetailsProduct, (detailsProduct) => detailsProduct.product),
-    __metadata("design:type", detail_productsordered_entity_1.DetailsProduct)
+    __metadata("design:type", Array)
 ], Products.prototype, "details", void 0);
 Products = __decorate([
     (0, typeorm_1.Entity)()

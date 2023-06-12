@@ -124,7 +124,7 @@
         align-items: center; }
         * header .header .header-action .header-acction-item {
           cursor: pointer;
-          padding: 0 18px; }
+          padding: 0 12px; }
   * .login-page {
     width: 500px;
     background-color: #fff;

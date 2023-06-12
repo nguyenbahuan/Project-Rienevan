@@ -5,7 +5,10 @@ import {
   EntitySchema,
   OneToMany,
   BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
 } from "typeorm";
+import slugify from "slugify";
 import { Products } from "./products.entity";
 @Entity()
 export class Categories extends BaseEntity {
@@ -15,6 +18,20 @@ export class Categories extends BaseEntity {
   @Column()
   name: string;
 
+  @Column()
+  slug: string;
+
   @OneToMany(() => Products, (product) => product.categories)
   product: Products[];
+
+  @BeforeUpdate()
+  @BeforeInsert()
+  generateSlug() {
+    this.slug = slugify(this.name, {
+      replacement: "-",
+      lower: true,
+      locale: "vi",
+      trim: true,
+    });
+  }
 }
