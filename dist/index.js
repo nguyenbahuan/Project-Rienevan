@@ -14,6 +14,7 @@ const express_session_1 = __importDefault(require("express-session"));
 const express_flash_1 = __importDefault(require("express-flash"));
 const passport_2 = __importDefault(require("passport"));
 const routers_1 = __importDefault(require("./routers"));
+// import Store from "store2";
 dotenv_1.default.config();
 //express
 const app = (0, express_1.default)();

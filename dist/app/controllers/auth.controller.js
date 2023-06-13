@@ -18,7 +18,7 @@ class authController {
     }
     static register(req, res, next) {
         const roles = new role_entity_1.Roles();
-        roles.id = 4;
+        roles.id = 3;
         const user = new user_entity_1.User();
         user.username = req.body.username;
         user.password = req.body.password;

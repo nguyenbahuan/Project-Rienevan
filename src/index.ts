@@ -11,6 +11,7 @@ import flash from "express-flash";
 import passport from "passport";
 import router from "./routers";
 import { User } from "./app/models/user.entity";
+// import Store from "store2";
 
 dotenv.config();
 //express

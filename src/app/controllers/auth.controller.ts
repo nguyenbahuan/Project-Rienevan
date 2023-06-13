@@ -20,7 +20,7 @@ class authController {
   }
   static register(req: Request, res: Response, next: NextFunction) {
     const roles = new Roles();
-    roles.id = 4;
+    roles.id = 3;
     const user = new User();
     user.username = req.body.username;
     user.password = req.body.password;
