@@ -14,9 +14,30 @@ class authController {
   //   return user;
   // }
   static async login(req: Request, res: Response, next: NextFunction) {
-    if (req.user?.role.role === "admin") {
-      res.redirect("/admin");
-    } else res.redirect("/");
+    // if (req.user?.role.role === "admin") {
+    //   res.redirect("/admin");
+    // } else res.redirect("/");
+    passport.authenticate("local", (err: any, user: any, info: any) => {
+      if (err || !user) {
+        const message = info ? info.message : "Đăng nhập thất bại";
+        res.json({ message: message });
+        return;
+      }
+
+      // Đăng nhập thành công
+      req.login(user, () => {
+        req.session.user = user;
+        if (user.role.role === "admin") {
+          res.json({
+            url: "/admin",
+          });
+        } else {
+          res.json({
+            url: "/",
+          });
+        }
+      });
+    })(req, res, next);
   }
   static register(req: Request, res: Response, next: NextFunction) {
     const roles = new Roles();

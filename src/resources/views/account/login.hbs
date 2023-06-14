@@ -4,7 +4,7 @@
       <div class="user-icon">
         <i class="fa fa-user-circle" aria-hidden="true"></i>
       </div>
-      <form  class="form-login" action="/acount/login" method="POST">
+      <form  class="form-login" action="/account/login" method="POST">
         <h1 class="login">ĐĂNG NHẬP</h1>
         <div class="input-user">
           <input
@@ -13,6 +13,7 @@
             name="username"
             placeholder="Enter username"
           />
+          
         </div>
         <div class="input-pw">
           <input
@@ -22,6 +23,7 @@
             placeholder="Enter password"
           />
         </div>
+        <small class="text-danger error-text password_err"></small>
         <input id="btn-login" type="submit" name="" value="ĐĂNG NHẬP" />
         <div class="message">
           <a href="#">Quên mật khẩu? </a>
@@ -46,6 +48,17 @@
       success: function(data) {
         // Xử lý kết quả trả về từ server
         console.log(data);
+        var error = $(".error-text");
+            for (var i = 0; i < error.length; i++) {
+                error[i].innerHTML = "";
+            }
+            if (data.message) {
+              $('.password_err').text(data.message)
+            }
+               
+        if(data.url){
+          window.location.href = data.url;
+        }
       },
       error: function(xhr, status, error) {
         // Xử lý lỗi nếu có

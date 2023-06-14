@@ -4,11 +4,7 @@ import passport from "passport";
 import checkMiddlerWares from "../middlewares/middlewearAdmin";
 const router = Router();
 
-router.post(
-  "/login",
-  passport.authenticate("local", { failureRedirect: "/" }),
-  authController.login
-);
+router.post("/login", authController.login);
 router.get("/login", (req: Request, res: Response) => {
   res.render("account/login");
 });

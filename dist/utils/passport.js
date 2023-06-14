@@ -39,17 +39,18 @@ function initialize(passport) {
                 username: joi_1.default
                     .string()
                     .required()
-                    .min(8)
+                    .min(6)
                     .max(30)
                     .error(new Error("Username không hợp lệ")),
                 password: joi_1.default
                     .string()
                     .required()
-                    .min(8)
+                    .min(6)
                     .max(30)
                     .error(new Error("Password không hợp lệ")),
             });
             const result = schema.validate({ username, password });
+            console.log(result);
             if (result.error) {
                 const errMessage = result.error.message;
                 return cb(null, false, { message: errMessage });
