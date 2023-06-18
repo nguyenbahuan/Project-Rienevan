@@ -106,6 +106,9 @@
         <li><a class="app-menu__item" href="/admin/bills"><span
               class="app-menu__label"
             >Quản lý đơn hàng</span></a></li>
+        <li><a class="app-menu__item" href="/admin/categories"><span
+              class="app-menu__label"
+            >Quản lý danh mục</span></a></li>
       </ul>
     </aside>
     <main class="app-content">
@@ -118,19 +121,19 @@
     <script src="js/main.js"></script>
     <script src="js/plugins/pace.min.js"></script>
     <script>
-      const inpFile = document.getElementById("inpFile"); const loadFile =
-      document.getElementById("loadFile"); const previewContainer =
-      document.getElementById("imagePreview"); const previewContainer =
-      document.getElementById("imagePreview"); const previewImage =
-      previewContainer.querySelector(".image-preview__image"); const
-      previewDefaultText =
+      console.log('hehe') /* const inpFile = document.getElementById("inpFile");
+      const loadFile = document.getElementById("loadFile"); const
+      previewContainer = document.getElementById("imagePreview"); const
+      previewContainer = document.getElementById("imagePreview"); const
+      previewImage = previewContainer.querySelector(".image-preview__image");
+      const previewDefaultText =
       previewContainer.querySelector(".image-preview__default-text");
       inpFile.addEventListener("change", function () { const file =
       this.files[0]; if (file) { const reader = new FileReader();
       previewDefaultText.style.display = "none"; previewImage.style.display =
       "block"; reader.addEventListener("load", function () {
       previewImage.setAttribute("src", this.result); });
-      reader.readAsDataURL(file); } });
+      reader.readAsDataURL(file); } }); */
 
     </script>
   </body>

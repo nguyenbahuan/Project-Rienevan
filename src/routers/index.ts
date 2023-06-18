@@ -8,6 +8,7 @@ import adminRouter from "./admin";
 import productRouter from "./product";
 import Cart from "./cart";
 import path from "path";
+import checkMiddlerWares from "../middlewares/middlewearAdmin";
 function router(app: any) {
   app.use("/admin", adminRouter);
   app.use("/account", authRouter);

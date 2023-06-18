@@ -16,12 +16,31 @@ const upload = multer({ storage: storage });
 
 // import checkMiddlerWares from "../middlewares/middlewearAdmin";
 const router = Router();
+//categories
+router.delete("/categories/delete-category", adminController.destroyCategories);
+router.put(
+  "/categories/edit-category",
+  upload.single("imgUpload"),
+  adminController.updateCategories
+);
+router.get("/categories/edit-category", adminController.editCategories);
+router.post("/categories/add-category", adminController.storeCategories);
+router.get("/categories/add-category", adminController.createCategories);
+router.get("/categories", adminController.categories);
 
+//products
 router.post(
   "/products/add-product",
   upload.single("imgUpload"),
   adminController.storeProduct
 );
+router.delete("/products/delete-product", adminController.destroyProduct);
+router.put(
+  "/products/edit-product",
+  upload.single("imgUpload"),
+  adminController.updateProduct
+);
+router.get("/products/edit-product", adminController.editProduct);
 router.get("/products/add-product", adminController.createProduct);
 router.get("/products", adminController.products);
 router.get("/", checkMiddlerWares.checkIsAdmin, adminController.products);

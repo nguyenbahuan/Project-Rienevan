@@ -16,6 +16,9 @@ router.get("/", siteController_1.default.products);
 // router.get("/singup", (req: Request, res: Response) => {
 //   res.render("account/singup");
 // });
+router.get("/search", siteController_1.default.search);
+router.get("/collections/:slug", siteController_1.default.selectCollections);
+router.get("/collections", siteController_1.default.collections);
 // router.get("/admin", (req: Request, res: Response) => {
 //   res.render("admin/admin", { title: "ADMIN", layout: "admin" });
 // });

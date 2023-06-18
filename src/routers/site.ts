@@ -15,6 +15,10 @@ router.get("/", siteController.products);
 //   res.render("account/singup");
 // });
 
+router.get("/search", siteController.search);
+router.get("/collections/:slug", siteController.selectCollections);
+router.get("/collections", siteController.collections);
+
 // router.get("/admin", (req: Request, res: Response) => {
 //   res.render("admin/admin", { title: "ADMIN", layout: "admin" });
 // });

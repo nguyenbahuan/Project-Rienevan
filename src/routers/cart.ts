@@ -4,6 +4,7 @@ import session from "express-session";
 import internal from "stream";
 import { User } from "../app/models/user.entity";
 import { json } from "stream/consumers";
+import cartController from "../app/controllers/cartController";
 // import store from "store2";
 const router = Router();
 var app = express();
@@ -25,14 +26,11 @@ declare module "express-session" {
 router.get("/", (req: Request, res: Response) => {
   res.render("cart/cart");
 });
-// router.post("/", (req: Request, res: Response) => {
-// let { id, quantyti } = req.body;
-// const cart = {
-//   id: id,
-//   Quantyti: quantyti,
-// };
-//   // req.session.cart = JSON.stringify(cart);
-// });
+
+router.get("/bill", (req: Request, res: Response) => {
+  res.render("cart/bill");
+});
+router.post("/", cartController.storeBill);
 
 router.get("/test", (req: Request, res: Response, next: NextFunction) => {
   res.send(req.session);

@@ -13,6 +13,15 @@
     border-top: 10px solid transparent;
     transform: rotate(45deg);
   }
+
+  .cover {
+    width: 20px;
+    height: 30px;
+    background-color: #4a4a4a;
+    position: absolute;
+    top: 0;
+    right: -2px;
+  }
 </style>
 <header style="background-color: #303030;">
   <div class="container header">
@@ -26,16 +35,16 @@
       <ul class="menu-main">
         <li class="menu-item"><a href="/" class="leading-[3rem]">Trang chủ</a></li>
         <li class="menu-item menu-lv1">
-          <a href="" class="leading-[3rem]">Cửa hàng</a>
+          <a href="/collections" class="leading-[3rem]">Cửa hàng</a>
           <div class="sub-menu-lv2">
             <ul>
               <li>
-                <a href="">Sản phẩm giày</a>
+                <a href="/collections/giay">Sản phẩm giày</a>
                 <div class="sub-menu-lv3">
                   <ul class="menu-main-lv3">
-                    <li><a href="">Giày luyện tập</a></li>
-                    <li><a href="">Giày trượt ván</a></li>
-                    <li><a href="">Giày thời trang</a></li>
+                    <li><a href="/collections/giay-luyen-tap">Giày luyện tập</a></li>
+                    <li><a href="/collections/giay-truot-van">Giày trượt ván</a></li>
+                    <li><a href="/collections/giay-thoi-trang">Giày thời trang</a></li>
                   </ul>
                 </div>
               </li>
@@ -130,37 +139,41 @@
     const template_cart = document.querySelector(".template_cart");
 
     function showCart() {
+
       let sum = 0;
       let sum_money = 0
       if (localStorage.getItem("cart")) {
+        //const template_cart = document.querySelector(".template_cart");
         let storage = localStorage.getItem("cart");
         cart = JSON.parse(storage);
         cart.map((item, index) => {
+
           sum += item.Quantity
           sum_money += item.Quantity * item.price
           cart_amount.textContent = sum;
           total_money.textContent = `${formatMoney(sum_money)}đ`;
 
           template_cart.innerHTML += `<div class="flex ">
-         
-    <div class="w-[85px] h-[85px] border border-white overflow-hiden"><img src="${item.img}" alt=""
-        class="cart_img w-full object-cover h-full" /></div>
 
-    <div class="ml-3 flex-1 flex flex-column justify-between">
-      <h2 class="font-bold cart_name">${item.name}</h2>
-      <span class="cart_size">size: 44</span>
-      <span class="cart_quantyti">so luong: ${item.Quantity}</span>
+                  <div class="w-[85px] h-[85px] border border-white overflow-hiden"><img src="${item.img}" alt=""
+                      class="cart_img w-full object-cover h-full" /></div>
 
-    </div>
-    <div class="mr-[10px] flex justify-between flex-column">
-      <span class="text-end "><i class="btn-remove fa-solid fa-rectangle-xmark text-[25px]">
-        ${index}
-      </i></span>
-      <h2>${formatMoney(item.price)}đ</h2>
-    </div>
-  </div>
-  <hr class="my-[15px]">
-  </hr>`
+                  <div class="ml-3 flex-1 flex flex-column justify-between">
+                    <h2 class="font-bold cart_name">${item.name}</h2>
+                    <span class="cart_size">size: ${item.size}</span>
+                    <span class="cart_quantyti">so luong: ${item.Quantity}</span>
+
+                  </div>
+                  <div class="relative mr-[10px] flex justify-between flex-column">
+                    <span class="text-end "><i class="btn-remove fa-solid fa-rectangle-xmark text-[25px]">
+                        ${index}
+                      </i></span>
+                    <h2>${formatMoney(item.price)}đ</h2>
+                    <span class="cover"></span>
+                  </div>
+                </div>
+                <hr class="my-[15px]">
+                </hr>`
         });
       } else {
 
@@ -170,7 +183,9 @@
       }
     }
 
-    showCart()
+
+    showCart();
+
 
 
     document.addEventListener("click", function (e) {
@@ -186,14 +201,16 @@
           localStorage.removeItem("cart")
           showCart()
         }
-        else {
+        else if (cart.length > 1) {
           let newCart = [...cart]
           newCart.splice(index, 1);
           console.log(newCart)
           localStorage.removeItem("cart")
           localStorage.setItem("cart", JSON.stringify(newCart))
+          template_cart.innerHTML = ""
+          showCart()
         }
-        showCart()
+
       }
     })
 

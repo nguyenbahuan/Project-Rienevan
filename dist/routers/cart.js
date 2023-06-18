@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const express_2 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
+const cartController_1 = __importDefault(require("../app/controllers/cartController"));
 // import store from "store2";
 const router = (0, express_1.Router)();
 var app = (0, express_2.default)();
@@ -19,14 +20,10 @@ app.use((0, express_session_1.default)({
 router.get("/", (req, res) => {
     res.render("cart/cart");
 });
-// router.post("/", (req: Request, res: Response) => {
-// let { id, quantyti } = req.body;
-// const cart = {
-//   id: id,
-//   Quantyti: quantyti,
-// };
-//   // req.session.cart = JSON.stringify(cart);
-// });
+router.get("/bill", (req, res) => {
+    res.render("cart/bill");
+});
+router.post("/", cartController_1.default.storeBill);
 router.get("/test", (req, res, next) => {
     res.send(req.session);
 });

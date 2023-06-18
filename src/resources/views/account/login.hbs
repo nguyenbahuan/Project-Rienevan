@@ -4,28 +4,18 @@
       <div class="user-icon">
         <i class="fa fa-user-circle" aria-hidden="true"></i>
       </div>
-      <form action="/account/login" method="post">
+      <form class="form-login" action="/acount/login" method="POST">
         <h1 class="login">ĐĂNG NHẬP</h1>
         <div class="input-user">
-          <input
-            id="username-login"
-            type="text"
-            name="username"
-            placeholder="Enter username"
-          />
+          <input id="username-login" type="text" name="username" placeholder="Enter username" />
         </div>
         <div class="input-pw">
-          <input
-            id="password-login"
-            type="password"
-            name="password"
-            placeholder="Enter password"
-          />
+          <input id="password-login" type="password" name="password" placeholder="Enter password" />
         </div>
         <input id="btn-login" type="submit" name="" value="ĐĂNG NHẬP" />
         <div class="message">
           <a href="#">Quên mật khẩu? </a>
-          <a href="/account/singup">Đăng kí tài khoản mới </a>
+          <a href="/acount/singup">Đăng kí tài khoản mới </a>
 
         </div>
       </form>
@@ -33,3 +23,26 @@
     </div>
   </div>
 </div>
+</div>
+{{!--
+<script>
+  $(document).ready(function () {
+    $('.form-login').on('submit', function (e) {
+      e.preventDefault(); // Ngăn chặn sự kiện submit mặc định
+      var formData = $(this).serialize(); // Lấy các giá trị trong form
+      $.ajax({
+        type: $(this).attr("method"),
+        url: $(this).attr("action"), // URL xử lý form đăng nhập trên server
+        data: formData,
+        success: function (data) {
+          // Xử lý kết quả trả về từ server
+          console.log(data);
+        },
+        error: function (xhr, status, error) {
+          // Xử lý lỗi nếu có
+        }
+      });
+    });
+  });
+
+</script> --}}

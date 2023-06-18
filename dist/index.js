@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
+const method_override_1 = __importDefault(require("method-override"));
 const express_handlebars_1 = require("express-handlebars");
 const db_1 = __importDefault(require("./config/db"));
 const path_1 = __importDefault(require("path"));
@@ -18,6 +19,7 @@ const routers_1 = __importDefault(require("./routers"));
 dotenv_1.default.config();
 //express
 const app = (0, express_1.default)();
+app.use((0, method_override_1.default)("_method"));
 app.use((0, express_session_1.default)({
     secret: "huanba",
     resave: false,
@@ -40,8 +42,17 @@ app.use(express_1.default.static(path_1.default.resolve("src/public")));
 app.engine(".hbs", (0, express_handlebars_1.engine)({
     extname: ".hbs",
     helpers: {
-        sum(a, b) {
-            return a + b;
+        sum(arr) {
+            if (typeof arr === "object")
+                return arr.length;
+            return 0;
+            // return arr;
+        },
+        checkAmount(amount) {
+            if (amount > 0) {
+                return "Còn hàng";
+            }
+            return "Hết hàng";
         },
     },
 }));

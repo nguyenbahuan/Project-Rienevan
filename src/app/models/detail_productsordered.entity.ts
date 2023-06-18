@@ -9,6 +9,7 @@ import {
   ManyToOne,
 } from "typeorm";
 import { Products } from "./products.entity";
+import { Bills } from "./bills.entity";
 @Entity()
 export class DetailsProduct extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -16,9 +17,14 @@ export class DetailsProduct extends BaseEntity {
 
   @Column()
   amout: number;
+  @Column()
+  size: string;
 
   @ManyToOne(() => Products, (product) => product.details)
-  product: Products[];
+  product: Products;
+
+  @ManyToOne(() => Bills, (bills) => bills.details)
+  bills: Bills;
 
   @Column()
   created_at: Date;

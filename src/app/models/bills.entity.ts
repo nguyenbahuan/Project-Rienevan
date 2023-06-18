@@ -7,6 +7,7 @@ import {
   BaseEntity,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { DetailsProduct } from "./detail_productsordered.entity";
 import { User } from "./user.entity";
@@ -35,10 +36,11 @@ export class Bills extends BaseEntity {
 
   @Column()
   updated_at: Date;
+  @Column()
+  total_money: number;
 
-  @OneToOne(() => DetailsProduct)
-  @JoinColumn()
-  details: DetailsProduct;
+  @OneToMany(() => DetailsProduct, (detailsProduct) => detailsProduct.bills)
+  details: DetailsProduct[];
 
   @ManyToOne(() => User, (user) => user.bill)
   user: User[];

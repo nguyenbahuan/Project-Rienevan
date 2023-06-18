@@ -8,14 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Categories = void 0;
 const typeorm_1 = require("typeorm");
+const slugify_1 = __importDefault(require("slugify"));
 const products_entity_1 = require("./products.entity");
 let Categories = class Categories extends typeorm_1.BaseEntity {
     id;
     name;
+    slug;
     product;
+    generateSlug() {
+        this.slug = (0, slugify_1.default)(this.name, {
+            replacement: "-",
+            lower: true,
+            locale: "vi",
+            trim: true,
+        });
+    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -26,9 +39,20 @@ __decorate([
     __metadata("design:type", String)
 ], Categories.prototype, "name", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Categories.prototype, "slug", void 0);
+__decorate([
     (0, typeorm_1.OneToMany)(() => products_entity_1.Products, (product) => product.categories),
     __metadata("design:type", Array)
 ], Categories.prototype, "product", void 0);
+__decorate([
+    (0, typeorm_1.BeforeUpdate)(),
+    (0, typeorm_1.BeforeInsert)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], Categories.prototype, "generateSlug", null);
 Categories = __decorate([
     (0, typeorm_1.Entity)()
 ], Categories);

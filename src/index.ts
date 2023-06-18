@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import multer from "multer";
+import methodOverride from "method-override";
 import { engine } from "express-handlebars";
 import MysqlDataSource from "./config/db";
 import path from "path";
@@ -16,6 +17,7 @@ import { User } from "./app/models/user.entity";
 dotenv.config();
 //express
 const app: Express = express();
+app.use(methodOverride("_method"));
 app.use(
   session({
     secret: "huanba", // Chuỗi bí mật này được sử dụng để mã hóa cookie
@@ -51,8 +53,16 @@ app.engine(
   engine({
     extname: ".hbs",
     helpers: {
-      sum(a: number, b: number) {
-        return a + b;
+      sum(arr: any) {
+        if (typeof arr === "object") return arr.length;
+        return 0;
+        // return arr;
+      },
+      checkAmount(amount: number) {
+        if (amount > 0) {
+          return "Còn hàng";
+        }
+        return "Hết hàng";
       },
     },
   })

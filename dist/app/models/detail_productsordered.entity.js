@@ -12,10 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DetailsProduct = void 0;
 const typeorm_1 = require("typeorm");
 const products_entity_1 = require("./products.entity");
+const bills_entity_1 = require("./bills.entity");
 let DetailsProduct = class DetailsProduct extends typeorm_1.BaseEntity {
     id;
     amout;
+    size;
     product;
+    bills;
     created_at;
     updated_at;
 };
@@ -28,9 +31,17 @@ __decorate([
     __metadata("design:type", Number)
 ], DetailsProduct.prototype, "amout", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], DetailsProduct.prototype, "size", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => products_entity_1.Products, (product) => product.details),
-    __metadata("design:type", Array)
+    __metadata("design:type", products_entity_1.Products)
 ], DetailsProduct.prototype, "product", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => bills_entity_1.Bills, (bills) => bills.details),
+    __metadata("design:type", bills_entity_1.Bills)
+], DetailsProduct.prototype, "bills", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
