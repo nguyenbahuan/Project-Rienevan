@@ -14,8 +14,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/chart.js": "^2.9.37",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.0",
+    "canvas": "^2.11.2",
+    "chart.js": "^4.3.0",
     "class-validator": "^0.14.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",

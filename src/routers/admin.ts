@@ -43,6 +43,6 @@ router.put(
 router.get("/products/edit-product", adminController.editProduct);
 router.get("/products/add-product", adminController.createProduct);
 router.get("/products", adminController.products);
-router.get("/", checkMiddlerWares.checkIsAdmin, adminController.products);
+router.get("/", checkMiddlerWares.checkIsAdmin, adminController.controller);
 
 export default router;

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import MysqlDataSource from "../../config/db";
-// import multer from "multer";
+import { Chart } from "chart.js";
 import { Test } from "../models/test.entity";
 import { Categories } from "../models/categories.entity";
 import { Products } from "../models/products.entity";
@@ -9,6 +9,18 @@ import slugify from "slugify";
 const categoryRepository = MysqlDataSource.getRepository(Categories);
 const productsRepository = MysqlDataSource.getRepository(Products);
 class adminController {
+  async controller(req: Request, res: Response, next: NextFunction) {
+    const products = await MysqlDataSource.manager.find(Products);
+
+    const data = {
+      title: "Bảng điều khiển",
+      layout: "admin",
+      products: products,
+    };
+    // res.json(data);
+    res.render("admin/admin", data);
+  }
+
   async products(req: Request, res: Response, next: NextFunction) {
     const results = await productsRepository
       .createQueryBuilder("products")

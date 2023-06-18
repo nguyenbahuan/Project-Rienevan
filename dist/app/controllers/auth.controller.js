@@ -54,5 +54,13 @@ class authController {
         })
             .catch(next);
     }
+    static async logOut(req, res, next) {
+        req.logout((err) => {
+            req.session.user = null;
+            if (err)
+                return next(err);
+            res.redirect("/account/login");
+        });
+    }
 }
 exports.default = authController;

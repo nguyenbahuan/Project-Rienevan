@@ -58,9 +58,8 @@ __decorate([
     __metadata("design:type", Date)
 ], Bills.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => detail_productsordered_entity_1.DetailsProduct),
-    (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", detail_productsordered_entity_1.DetailsProduct)
+    (0, typeorm_1.OneToMany)(() => detail_productsordered_entity_1.DetailsProduct, (detailsProduct) => detailsProduct.bills),
+    __metadata("design:type", Array)
 ], Bills.prototype, "details", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.bill),

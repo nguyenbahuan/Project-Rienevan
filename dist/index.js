@@ -53,6 +53,9 @@ app.engine(".hbs", (0, express_handlebars_1.engine)({
             }
             return "Hết hàng";
         },
+        json: function (value, options) {
+            return JSON.stringify(value);
+        },
     },
 }));
 app.set("view engine", ".hbs");

@@ -4,6 +4,7 @@ import passport from "passport";
 import checkMiddlerWares from "../middlewares/middlewearAdmin";
 const router = Router();
 
+router.get("/logout", authController.logOut);
 router.post("/login", authController.login);
 router.get("/login", (req: Request, res: Response) => {
   res.render("account/login");

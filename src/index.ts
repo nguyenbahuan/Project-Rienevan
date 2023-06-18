@@ -63,6 +63,9 @@ app.engine(
         }
         return "Hết hàng";
       },
+      json: function (value: any, options: any) {
+        return JSON.stringify(value);
+      },
     },
   })
 );

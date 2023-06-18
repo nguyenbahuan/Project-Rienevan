@@ -34,5 +34,5 @@ router.put("/products/edit-product", upload.single("imgUpload"), admin_controlle
 router.get("/products/edit-product", admin_controller_1.default.editProduct);
 router.get("/products/add-product", admin_controller_1.default.createProduct);
 router.get("/products", admin_controller_1.default.products);
-router.get("/", middlewearAdmin_1.default.checkIsAdmin, admin_controller_1.default.products);
+router.get("/", middlewearAdmin_1.default.checkIsAdmin, admin_controller_1.default.controller);
 exports.default = router;

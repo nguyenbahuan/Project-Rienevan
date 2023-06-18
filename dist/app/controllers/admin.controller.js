@@ -11,6 +11,16 @@ const slugify_1 = __importDefault(require("slugify"));
 const categoryRepository = db_1.default.getRepository(categories_entity_1.Categories);
 const productsRepository = db_1.default.getRepository(products_entity_1.Products);
 class adminController {
+    async controller(req, res, next) {
+        const products = await db_1.default.manager.find(products_entity_1.Products);
+        const data = {
+            title: "Bảng điều khiển",
+            layout: "admin",
+            products: products,
+        };
+        // res.json(data);
+        res.render("admin/admin", data);
+    }
     async products(req, res, next) {
         const results = await productsRepository
             .createQueryBuilder("products")
