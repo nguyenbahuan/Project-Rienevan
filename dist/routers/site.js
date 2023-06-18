@@ -6,9 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const siteController_1 = __importDefault(require("../app/controllers/siteController"));
 const router = (0, express_1.Router)();
-router.get("/", (req, res) => {
-    res.render("home");
-});
+router.get("/", siteController_1.default.products);
+// router.get("/products", (req: Request, res: Response) => {
+//   res.render("cart/detailProduct");
+// });
 // router.get("/login", (req: Request, res: Response) => {
 //   res.render("account/login");
 // });

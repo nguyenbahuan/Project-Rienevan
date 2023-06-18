@@ -1,0 +1,180 @@
+<style>
+       .test {
+              width: 20px;
+              height: 30px;
+              background-color: #303030;
+              position: absolute;
+              top: 0;
+              right: -2px;
+
+       }
+
+       input {
+              color: #4a4a4a;
+              border: 1px solid white;
+              padding: 10px 15px;
+              display: block;
+              cursor: pointer;
+              outline: none;
+              width: 100%;
+              margin-bottom: 20px;
+              border-radius: 10px;
+              font-size: 17px;
+
+       }
+
+       .main-right li:before {
+              content: "•";
+              margin-right: 5px;
+       }
+</style>
+<div class="mt-[100px] px-[50px] ">
+       <a class="mb-4 text-xl" href="/">Trang chủ / <span style="color: #777;" class="text-lg">gio hang (9)</span></a>
+       <form action="/cart" method="post">
+              <div class="main flex gap-x-8 mt-4">
+                     <div class="main-left w-[65%]">
+                            <h2 class="text-2xl font-bold mt-3 ml-3 mb-2">Giỏ Hàng của bạn</h2>
+                            <hr style="color: #777;" class="mb-3">
+                            <h2 class="text-lg mb-3">Bạn đang có <b>9 sản phẩm</b> trong giỏ hàng </h2>
+                            <div class="cart rounded border p-5">
+
+                            </div>
+                     </div>
+                     <div class="main-right pl-4 flex-1">
+                            <h2 class="text-2xl font-bold mt-6 mb-2">Thông tin đơn hàng</h2>
+                            <div style="border-color:#777 ;" class=" py-6 flex justify-between w-full border-y-[1px]">
+                                   <h2 class="text-xl font-bold">Tổng tiền:</h2>
+                                   <span class="totalMoney text-2xl " style="color: #ffc107;">0</span>
+                            </div>
+                            <ul class="mt-4">
+                                   <li>Phí vận chuyển sẽ được tính ở trang thanh toán.</li>
+                                   <li>Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</li>
+                                   <li>Thời gian giao hàng từ 3 đến 5 ngày kể từ khi xác nhận đơn hàng</li>
+                            </ul>
+
+                            <div class="rounded border p-3 mt-3">
+                                   <h1 class="text-xl mb-3">THông tin giao hàng</h1>
+                                   <input type="text " required placeholder="Họ Và tên" name="fullName">
+
+                                   <div class="flex gap-x-3">
+                                          <input type="email" required placeholder="email" name="email">
+                                          <input class="w-[60%]" type="text" placeholder="số điện thoại" name="phone">
+                                          <input class="sum" type="hidden" value="" name="total_money">
+                                   </div>
+                                   <input type="text" required placeholder="địa chỉ giao hàng" name="address">
+
+                                   <div class="flex justify-end"> <button onclick="handleAddtobill()"
+                                                 class="btn_submit px-[15px] rounded py-[10px] w-[200px]"
+                                                 style="background-color: #ffc107;" type="submit">đặt hàng</button>
+                                   </div>
+                            </div>
+
+                     </div>
+              </div>
+
+       </form>
+</div>
+<script>
+       document.addEventListener("DOMContentLoaded", function () {
+              cart_modal.remove();
+       })
+       const sumMoney = document.querySelector(".totalMoney");
+       const cart_quantyti = document.querySelector(".cart_amount");
+       const cart_container = document.querySelector(".cart");
+       const sumM = document.querySelector(".sum");
+       function handleAddtobill() {
+              localStorage.removeItem('cart')
+
+       }
+       function showCart() {
+              let sum = 0
+              if (localStorage.getItem("cart")) {
+                     //const template_cart = document.querySelector(".template_cart");
+                     let storage = localStorage.getItem("cart");
+                     cart = JSON.parse(storage);
+                     cart.map((item, index) => {
+                            sum += item.Quantity * item.price
+                            sumM.value = sum
+                            sumMoney.textContent = `${formatMoney(sum)}đ`;
+                            cart_container.innerHTML += `<div class="flex ">
+
+                  <div class="w-[85px] h-[85px] border border-white overflow-hiden"><img src="${item.img}" alt=""
+                      class="cart_img w-full object-cover h-full" /></div>
+
+                  <div class="ml-3 flex-1 flex flex-column justify-between">
+                    <h2 class="font-bold cart_name">${item.name}</h2>
+                    <span class="cart_size">size: ${item.size}</span>
+                     <span class="cart_quantyti">số lượng: ${item.Quantity}</span>
+
+                  </div>
+                  <div class="relative mr-[10px] flex justify-between flex-column">
+                    <span class="text-end "><i class="btnRemove cursor-pointer fa-solid fa-rectangle-xmark text-[25px]">
+                        ${index}
+                      </i></span>
+                     <input type="hidden" value="${item.id}" name="IdProduct">
+                     <input type="hidden" value="${item.Quantity}" name="productAmount">
+                     <input type="hidden" value="${item.size}" name="productSize">
+                     <h2>${formatMoney(item.price)}đ</h2>
+                    <span class="test"></span>
+                  </div>
+                </div>
+                <hr class="my-[15px]">
+                </hr>`
+                     });
+              } else {
+                     cart_container.innerHTML = ` <h2>Giỏ hàng trống</h2>`;
+              }
+       }
+
+       showCart();
+
+       document.addEventListener("click", function (e) {
+
+              if (e.target.matches(".btnRemove")) {
+
+                     const index = Number(e.target.textContent)
+                     console.log(index)
+                     let storage = localStorage.getItem("cart");
+                     let cart = JSON.parse(storage);
+
+                     if (cart.length == 1) {
+                            localStorage.removeItem("cart")
+                            showCart()
+                     }
+                     else if (cart.length > 1) {
+                            let newCart = [...cart]
+                            newCart.splice(index, 1);
+                            console.log(newCart)
+                            localStorage.removeItem("cart")
+                            localStorage.setItem("cart", JSON.stringify(newCart))
+                            cart_container.innerHTML = ""
+                            showCart()
+                     }
+                     setTimeout(() => {
+                            location.reload()
+                     }, 800)
+
+              }
+       })
+
+       function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+              try {
+                     decimalCount = Math.abs(decimalCount);
+                     decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+                     const negativeSign = amount < 0 ? "-" : "";
+
+                     let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+                     let j = (i.length > 3) ? i.length % 3 : 0;
+
+                     return negativeSign +
+                            (j ? i.substr(0, j) + thousands : '') +
+                            i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
+                            (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+              } catch (e) {
+                     console.log(e)
+              }
+       };
+
+
+</script>

@@ -1,34 +1,28 @@
 <div class="row mt-[70px]">
   <div class="collection-banner-header mb-[20px]">
     <div class="container container-xs-pd0">
-      <img
-        class="ls-is-cached lazyloaded"
-        src="/img/banner-shop_01446af4d9054e26bc0de699fd4ee2fe.webp"
-        alt="Products"
-      />
+      <img class="ls-is-cached lazyloaded" src="/img/banner-shop_01446af4d9054e26bc0de699fd4ee2fe.webp"
+        alt="Products" />
     </div>
   </div>
   <h1 class="text-center text-[32px] mb-[20px]">Tìm kiếm</h1>
   <p class="text-center mb-[20px]">Có
     <span>{{sum products}}</span>
-    sản phẩm được tìm kiếm</p>
+    sản phẩm được tìm kiếm
+  </p>
   <div class="container">
     <div class="main-products">
       <div class="list-products grid grid-cols-3 gap-4">
         {{#each products}}
-          <div class="item-product rounded-lg bg-gray-500">
-            <a class="cursor-pointer block" href="#">
-              <img
-                src="/upload/{{this.img}}"
-                alt=""
-                class="max-w-full object-cover"
-              />
-            </a>
-            <div class="py-2 px-3 flex flex-col justify-between">
-              <h2 class="text-lg text-white-700">{{this.name}}</h2>
-              <span class="text-lg" style="color:#ffc107">{{this.price}}đ</span>
-            </div>
+        <div class="item-product rounded-lg bg-gray-500">
+          <a class="cursor-pointer block" href="/products/{{this.id}}">
+            <img src="/upload/{{this.img}}" alt="" class="max-w-full object-cover" />
+          </a>
+          <div class="py-2 px-3 flex flex-col justify-between">
+            <h2 class="text-lg text-white-700">{{this.name}}</h2>
+            <span class="text-lg" style="color:#ffc107">{{this.price}}đ</span>
           </div>
+        </div>
         {{/each}}
 
       </div>

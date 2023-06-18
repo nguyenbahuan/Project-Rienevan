@@ -17,6 +17,8 @@ export class DetailsProduct extends BaseEntity {
 
   @Column()
   amout: number;
+  @Column()
+  size: string;
 
   @ManyToOne(() => Products, (product) => product.details)
   product: Products;

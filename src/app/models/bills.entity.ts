@@ -36,6 +36,8 @@ export class Bills extends BaseEntity {
 
   @Column()
   updated_at: Date;
+  @Column()
+  total_money: number;
 
   @OneToMany(() => DetailsProduct, (detailsProduct) => detailsProduct.bills)
   details: DetailsProduct[];

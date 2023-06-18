@@ -4,12 +4,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const chart_js_1 = require("chart.js");
+const db_1 = __importDefault(require("../../config/db"));
 const products_entity_1 = require("../models/products.entity");
 const categories_entity_1 = require("../models/categories.entity");
-const db_1 = __importDefault(require("../../config/db"));
 const categoryRepository = db_1.default.getRepository(categories_entity_1.Categories);
 const productsRepository = db_1.default.getRepository(products_entity_1.Products);
 class siteController {
+    async products(req, res, next) {
+        let data = res.locals.data;
+        const results = await db_1.default.manager.find(products_entity_1.Products);
+        const product2 = await db_1.default.getRepository(products_entity_1.Products)
+            .createQueryBuilder("Products")
+            .where("Products.categoriesId = :categoriesId", { categoriesId: 2 })
+            .getMany();
+        const product3 = await db_1.default.getRepository(products_entity_1.Products)
+            .createQueryBuilder("Products")
+            .where("Products.categoriesId = :categoriesId", { categoriesId: 1 })
+            .getMany();
+        data = {
+            products1: results,
+            products2: product2,
+            products3: product3,
+        };
+        res.render("main/home", {
+            title: "Home",
+            layout: "main",
+            data: data,
+        });
+    }
     async header(req, res, next) {
         const category = await categoryRepository.find();
         res.render("partials/header", { category: category });

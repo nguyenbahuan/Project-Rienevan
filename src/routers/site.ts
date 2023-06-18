@@ -1,12 +1,13 @@
 import { Router, Request, Response } from "express";
 import authController from "../app/controllers/auth.controller";
 import siteController from "../app/controllers/siteController";
-
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  res.render("home");
-});
+router.get("/", siteController.products);
+// router.get("/products", (req: Request, res: Response) => {
+//   res.render("cart/detailProduct");
+// });
+
 // router.get("/login", (req: Request, res: Response) => {
 //   res.render("account/login");
 // });
