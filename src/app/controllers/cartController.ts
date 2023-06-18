@@ -18,6 +18,7 @@ class cartController {
       .save()
       .then(() => {})
       .catch(next);
+
     const queryResult = await billReRepository
       .createQueryBuilder("bill")
       .select("MAX(bill.id)", "maxId")
@@ -34,7 +35,6 @@ class cartController {
       bill.id = maxId + 1;
       detailProduct.bills = bill;
       product.id = req.body.IdProduct[i];
-      // console.log("eeeeeeeeeeeeeeeeee", req.body.IdProduct[i]);
       detailProduct.product = product;
       detailProduct.amout = req.body.productAmount[i];
       detailProduct.size = req.body.productSize[i];

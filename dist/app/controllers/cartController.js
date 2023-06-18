@@ -34,7 +34,6 @@ class cartController {
             bill.id = maxId + 1;
             detailProduct.bills = bill;
             product.id = req.body.IdProduct[i];
-            // console.log("eeeeeeeeeeeeeeeeee", req.body.IdProduct[i]);
             detailProduct.product = product;
             detailProduct.amout = req.body.productAmount[i];
             detailProduct.size = req.body.productSize[i];
