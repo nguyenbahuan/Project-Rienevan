@@ -67,6 +67,15 @@ app.engine(
       json: function (value: any, options: any) {
         return JSON.stringify(value);
       },
+      checkProducts: function (products: any, options: any) {
+        let count = 0;
+        for (let i = 0; i < products.length; i++) {
+          if (products[i] <= 10) {
+            count += 1;
+          }
+        }
+        return count;
+      },
     },
   })
 );

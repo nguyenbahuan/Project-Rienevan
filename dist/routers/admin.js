@@ -20,6 +20,8 @@ const storage = multer_1.default.diskStorage({
 const upload = (0, multer_1.default)({ storage: storage });
 // import checkMiddlerWares from "../middlewares/middlewearAdmin";
 const router = (0, express_1.Router)();
+//statistical
+router.get("/statistical", admin_controller_1.default.statistical);
 //categories
 router.delete("/categories/delete-category", admin_controller_1.default.destroyCategories);
 router.put("/categories/edit-category", upload.single("imgUpload"), admin_controller_1.default.updateCategories);

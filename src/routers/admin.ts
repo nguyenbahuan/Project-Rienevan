@@ -16,6 +16,10 @@ const upload = multer({ storage: storage });
 
 // import checkMiddlerWares from "../middlewares/middlewearAdmin";
 const router = Router();
+
+//statistical
+router.get("/statistical", adminController.statistical);
+
 //categories
 router.delete("/categories/delete-category", adminController.destroyCategories);
 router.put(

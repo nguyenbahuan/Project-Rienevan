@@ -11,11 +11,7 @@
         <div class="row element-button">
           <div class="col-sm-2">
 
-            <a
-              class="btn btn-add btn-sm"
-              href="/admin/categories/add-category"
-              title="Thêm"
-            ><i class="fas fa-plus"></i>
+            <a class="btn btn-add btn-sm" href="/admin/categories/add-category" title="Thêm"><i class="fas fa-plus"></i>
               Tạo mới danh mục</a>
           </div>
           <div class="col-sm-2">
@@ -34,32 +30,19 @@
           </thead>
           <tbody>
             {{#each categories}}
-              <tr>
-                <td>{{this.id}}</td>
-                <td>{{this.name}}</td>
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.name}}</td>
 
-                <td><button
-                    {{!-- href="/admin/categories/delete?id={{this.id}}" --}}
-                    class="btn btn-primary btn-sm trash"
-                    type="button"
-                    title="Xóa"
-                    {{! data-toggle="modal"
-                    data-target="#ModalUP" }}
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalDelete"
-                    data-bs-id="{{this.id}}"
-                    {{! onclick="myFunction(this)" }}
-                  ><i class="fas fa-trash-alt"></i>
-                  </button>
-                  <a
-                    href="/admin/categories/edit-category?id={{this.id}}"
-                    class="btn btn-primary btn-sm edit"
-                    type="button"
-                    title="Sửa"
-                    id="show-emp"
-                  ><i class="fas fa-edit"></i></a>
-                </td>
-              </tr>
+              <td><button {{!-- href="/admin/categories/delete?id={{this.id}}" --}} class="btn btn-danger btn-sm trash"
+                  type="button" title="Xóa" {{! data-toggle="modal" data-target="#ModalUP" }} data-bs-toggle="modal"
+                  data-bs-target="#modalDelete" data-bs-id="{{this.id}}" {{! onclick="myFunction(this)" }}><i
+                    class="fas fa-trash-alt"></i>
+                </button>
+                <a href="/admin/categories/edit-category?id={{this.id}}" class="btn btn-primary btn-sm edit"
+                  type="button" title="Sửa" id="show-emp"><i class="fas fa-edit"></i></a>
+              </td>
+            </tr>
             {{/each}}
           </tbody>
         </table>
@@ -72,54 +55,40 @@
 <!--
   MODAL
 -->
-<div
-  class="modal fade"
-  id="modalDelete"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Bạn có muốn xóa
-          không</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">Bạn có muốn xóa
+          không ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       {{! <div class="modal-body">
         ...
       </div> }}
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Hủy</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
 
-        <button
-          id="btn-delete"
-          type="button"
-          class="btn btn-danger"
-        >Xóa</button>
+        <button id="btn-delete" type="button" class="btn btn-danger">Xóa</button>
       </div>
     </div>
   </div>
 </div>
 <script>
-  document.addEventListener("DOMContentLoaded", ()=> { var idCategory; var
-  exampleModal = document.getElementById('modalDelete'); var btnDelete =
-  document.getElementById('btn-delete'); var deleteForm =
-  document.forms['form-delete-category'];
-  exampleModal.addEventListener('show.bs.modal', event => { // Button that const
-  btn = event.relatedTarget; idCategory = btn.getAttribute('data-bs-id'); });
-  btnDelete.addEventListener('click', (event) => { deleteForm.action =
-  `/admin/categories/delete-category?id=${idCategory}&_method=DELETE`;
-  deleteForm.submit(); }); });
+  document.addEventListener("DOMContentLoaded", () => {
+    var idCategory; var
+      exampleModal = document.getElementById('modalDelete'); var btnDelete =
+        document.getElementById('btn-delete'); var deleteForm =
+          document.forms['form-delete-category'];
+    exampleModal.addEventListener('show.bs.modal', event => { // Button that const
+      btn = event.relatedTarget; idCategory = btn.getAttribute('data-bs-id');
+    });
+    btnDelete.addEventListener('click', (event) => {
+      deleteForm.action =
+        `/admin/categories/delete-category?id=${idCategory}&_method=DELETE`;
+      deleteForm.submit();
+    });
+  });
 
 </script>
 <!--

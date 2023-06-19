@@ -57,6 +57,15 @@ app.engine(".hbs", (0, express_handlebars_1.engine)({
         json: function (value, options) {
             return JSON.stringify(value);
         },
+        checkProducts: function (products, options) {
+            let count = 0;
+            for (let i = 0; i < products.length; i++) {
+                if (products[i] <= 10) {
+                    count += 1;
+                }
+            }
+            return count;
+        },
     },
 }));
 app.set("view engine", ".hbs");
