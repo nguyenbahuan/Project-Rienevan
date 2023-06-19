@@ -83,8 +83,8 @@
        const cart_container = document.querySelector(".cart");
        const sumM = document.querySelector(".sum");
        function handleAddtobill() {
-              localStorage.removeItem('cart')
 
+              localStorage.removeItem("cart")
        }
        function showCart() {
               let sum = 0
@@ -169,8 +169,7 @@
 
                      return negativeSign +
                             (j ? i.substr(0, j) + thousands : '') +
-                            i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
-                            (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+                            i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
               } catch (e) {
                      console.log(e)
               }

@@ -53,8 +53,8 @@
             </ul>
           </div>
         </li>
-        <li class="menu-item"><a href="" class="leading-[3rem]">News</a></li>
-        <li class="menu-item"><a href="" class="leading-[3rem]">Hỗ trợ</a></li>
+        <li class="menu-item"><a href="/news" class="leading-[3rem]">News</a></li>
+        <li class="menu-item"><a href="/support/feedback" class="leading-[3rem]">Hỗ trợ</a></li>
       </ul>
     </div>
 
@@ -236,8 +236,7 @@
 
         return negativeSign +
           (j ? i.substr(0, j) + thousands : '') +
-          i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
-          (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+          i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands);
       } catch (e) {
         console.log(e)
       }

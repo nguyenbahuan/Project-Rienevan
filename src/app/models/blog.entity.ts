@@ -15,7 +15,13 @@ export class Blog extends BaseEntity {
   title: string;
 
   @Column()
+  author:string;
+
+  @Column()
   content: string;
+
+  @Column()
+  img: string;
 
   @Column()
   created_at: Date;

@@ -8,6 +8,7 @@ const admin_controller_1 = __importDefault(require("../app/controllers/admin.con
 const middlewearAdmin_1 = __importDefault(require("../middlewares/middlewearAdmin"));
 const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path"));
+const manageInvoiceController_1 = __importDefault(require("../app/controllers/manageInvoiceController"));
 const storage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
         return cb(null, path_1.default.resolve("src/public/upload"));
@@ -37,4 +38,8 @@ router.get("/products/edit-product", admin_controller_1.default.editProduct);
 router.get("/products/add-product", admin_controller_1.default.createProduct);
 router.get("/products", admin_controller_1.default.products);
 router.get("/", middlewearAdmin_1.default.checkIsAdmin, admin_controller_1.default.controller);
+router.get("/table-bill", manageInvoiceController_1.default.listBills);
+router.get("/billDetail/:id", manageInvoiceController_1.default.billDetail);
+router.get("/edit-bill/:id", manageInvoiceController_1.default.editBill);
+router.put("/edit-bill/:id", manageInvoiceController_1.default.updateBill);
 exports.default = router;

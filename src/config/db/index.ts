@@ -13,6 +13,8 @@ import { Products } from "../../app/models/products.entity";
 import { Categories } from "../../app/models/categories.entity";
 import { Bills } from "../../app/models/bills.entity";
 import { DetailsProduct } from "../../app/models/detail_productsordered.entity";
+import { Blog } from "../../app/models/blog.entity";
+import { FeedBack } from "../../app/models/support.entity";
 // dotenv.config();
 
 const MysqlDataSource = new DataSource({
@@ -22,7 +24,17 @@ const MysqlDataSource = new DataSource({
   username: "root",
   password: "",
   database: "test",
-  entities: [Test, User, Roles, Products, Categories, Bills, DetailsProduct],
+  entities: [
+    Test,
+    User,
+    Roles,
+    Products,
+    Categories,
+    Bills,
+    DetailsProduct,
+    Blog,
+    FeedBack,
+  ],
   synchronize: true,
   logging: true,
 });

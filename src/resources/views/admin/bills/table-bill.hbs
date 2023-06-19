@@ -1,6 +1,6 @@
 <div class="app-title">
      <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+          <li class="breadcrumb-item active"><a href="#"><b>danh sách hóa đơn</b></a></li>
      </ul>
      <div id="clock"></div>
 </div>
@@ -8,50 +8,44 @@
      <div class="col-md-12">
           <div class="tile">
                <div class="tile-body">
-                    <div class="row element-button">
-                         <div class="col-sm-2">
-
-                              <a class="btn btn-add btn-sm" href="/admin/products/add-product" title="Thêm"><i
-                                        class="fas fa-plus"></i>
-                                   Tạo mới sản phẩm</a>
-                         </div>
-                         <div class="col-sm-2">
-
-                         </div>
-                    </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
                          <thead>
                               <tr>
-
-                                   <th>Mã sản phẩm</th>
-                                   <th>Tên sản phẩm</th>
-                                   <th>Ảnh</th>
-                                   <th>Size</th>
-                                   <th>Số lượng</th>
+                                   <th>Mã bill</th>
+                                   <th>Họ và tên </th>
+                                   <th>Số điện thoại</th>
+                                   <th>Địa chỉ</th>
                                    <th>Trạng thái</th>
-                                   <th>Giá tiền</th>
-                                   <th>Danh mục</th>
-                                   <th>Chức năng</th>
+                                   <th>Tổng tiền</th>
                               </tr>
                          </thead>
                          <tbody>
-                              {{#each product}}
+                              {{#each bills}}
                               <tr>
                                    <td>{{this.id}}</td>
-                                   <td>{{this.name}}</td>
-                                   <td><img src="/upload/{{this.img}}" alt="" width="100px;" /></td>
-                                   <td>{{this.size}}</td>
-                                   <td>{{this.amout}}</td>
-                                   <td>{{checkAmount this.amout}}</td>
-                                   <td>{{this.price}}</td>
-                                   <td>{{this.categories.name}}</td>
-                                   <td><button class="btn btn-danger btn-sm trash" title="Xóa" data-bs-toggle="modal"
+                                   <td>{{this.fullname}}</td>
+                                   <td>{{this.phone_number}}</td>
+                                   <td>{{this.address}}</td>
+                                   <td class="status"> {{this.status}} </td>
+
+                                   <td>{{formatMoney this.total_money}} đ</td>
+                                   <td>
+                                        <a href="/admin/billDetail/{{this.id}}" class="btn btn-primary btn-sm edit"
+                                             type="button" title="chi tiết" id="show-emp" data-toggle="modal"
+                                             data-target="#ModalUP"><i style="font-size: 14px;"
+                                                  class='bx bx-detail'></i></a>
+
+                                        <a href="/admin/edit-bill/{{this.id}}" class="btn btn-primary btn-sm edit"
+                                             type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                             data-target="#ModalUP"><i class="fas fa-edit"></i>
+                                        </a>
+
+
+                                        <button class="btn btn-danger btn-sm trash" title="Xóa" data-bs-toggle="modal"
                                              data-bs-target="#modalDelete" data-bs-id="{{this.id}}"><i
                                                   class="fas fa-trash-alt"></i>
                                         </button>
-                                        <a href="/admin/products/edit-product?id={{this.id}}"
-                                             class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                             data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></a>
+
                                    </td>
                               </tr>
                               {{/each}}
@@ -86,7 +80,32 @@
 MODAL
 -->
 <script>
+
+
+
      document.addEventListener("DOMContentLoaded", () => {
+          const status = document.querySelectorAll(".status")
+
+          status.forEach((item) => {
+               if (item.innerText == "đang xử lý" || item.innerText == "dang xu li") {
+                    item.style.backgroundColor = "#11CAF0";
+               }
+               if (item.innerText == "đã giao") {
+                    item.style.backgroundColor = "#198754";
+               }
+               if (item.innerText == "đã hủy") {
+                    item.style.backgroundColor = "#DC3545";
+               }
+               if (item.innerText == "đang vận chuyển") {
+                    item.style.backgroundColor = "#FFC008";
+               }
+          })
+
+
+
+
+
+
           var idProduct; var
                exampleModal = document.getElementById('modalDelete'); var btnDelete =
                     document.getElementById('btn-delete'); var deleteForm =

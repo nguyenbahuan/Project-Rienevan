@@ -1,8 +1,9 @@
-import { Router } from "express";
+import { Request, Response, NextFunction, Router } from "express";
 import adminController from "../app/controllers/admin.controller";
 import checkMiddlerWares from "../middlewares/middlewearAdmin";
 import multer from "multer";
 import path from "path";
+import manageInvoiceController from "../app/controllers/manageInvoiceController";
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     return cb(null, path.resolve("src/public/upload"));
@@ -48,5 +49,11 @@ router.get("/products/edit-product", adminController.editProduct);
 router.get("/products/add-product", adminController.createProduct);
 router.get("/products", adminController.products);
 router.get("/", checkMiddlerWares.checkIsAdmin, adminController.controller);
+
+router.get("/table-bill", manageInvoiceController.listBills);
+router.get("/billDetail/:id", manageInvoiceController.billDetail);
+
+router.get("/edit-bill/:id", manageInvoiceController.editBill);
+router.put("/edit-bill/:id", manageInvoiceController.updateBill);
 
 export default router;

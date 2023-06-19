@@ -9,6 +9,8 @@ const products_entity_1 = require("../../app/models/products.entity");
 const categories_entity_1 = require("../../app/models/categories.entity");
 const bills_entity_1 = require("../../app/models/bills.entity");
 const detail_productsordered_entity_1 = require("../../app/models/detail_productsordered.entity");
+const blog_entity_1 = require("../../app/models/blog.entity");
+const support_entity_1 = require("../../app/models/support.entity");
 // dotenv.config();
 const MysqlDataSource = new typeorm_1.DataSource({
     type: "mysql",
@@ -17,7 +19,17 @@ const MysqlDataSource = new typeorm_1.DataSource({
     username: "root",
     password: "",
     database: "test",
-    entities: [test_entity_1.Test, user_entity_1.User, role_entity_1.Roles, products_entity_1.Products, categories_entity_1.Categories, bills_entity_1.Bills, detail_productsordered_entity_1.DetailsProduct],
+    entities: [
+        test_entity_1.Test,
+        user_entity_1.User,
+        role_entity_1.Roles,
+        products_entity_1.Products,
+        categories_entity_1.Categories,
+        bills_entity_1.Bills,
+        detail_productsordered_entity_1.DetailsProduct,
+        blog_entity_1.Blog,
+        support_entity_1.FeedBack,
+    ],
     synchronize: true,
     logging: true,
 });
