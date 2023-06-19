@@ -21,7 +21,7 @@ const MysqlDataSource = new DataSource({
   port: 3306,
   username: "root",
   password: "",
-  database: "test",
+  database: "product",
   entities: [Test, User, Roles, Products, Categories, Bills, DetailsProduct],
   synchronize: true,
   logging: true,
