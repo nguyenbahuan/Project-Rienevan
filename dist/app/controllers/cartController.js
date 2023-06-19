@@ -19,6 +19,7 @@ class cartController {
         bill.status = "đang xử lý";
         const saveBIlls = await billReRepository.save(bill);
         const billId = saveBIlls.id;
+        // res.json(billId);
         let a = req.body.IdProduct;
         for (let i = 0; i < a.length; i++) {
             const detailProduct = await new detail_productsordered_entity_1.DetailsProduct();

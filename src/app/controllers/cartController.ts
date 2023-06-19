@@ -4,6 +4,7 @@ import { Bills } from "../models/bills.entity";
 import { DetailsProduct } from "../models/detail_productsordered.entity";
 import { Products } from "../models/products.entity";
 import { max } from "class-validator";
+import { join } from "path";
 
 const billReRepository = MysqlDataSource.getRepository(Bills);
 const productDetailReRepository = MysqlDataSource.getRepository(DetailsProduct);
@@ -18,6 +19,8 @@ class cartController {
     const saveBIlls = await billReRepository.save(bill);
 
     const billId = saveBIlls.id;
+
+    // res.json(billId);
     let a = req.body.IdProduct;
     for (let i = 0; i < a.length; i++) {
       const detailProduct = await new DetailsProduct();
