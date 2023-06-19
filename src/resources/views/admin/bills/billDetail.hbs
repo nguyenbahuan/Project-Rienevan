@@ -1,0 +1,64 @@
+<style>
+     .btn_confirm {
+          display: flex;
+          justify-content: flex-end;
+          padding-right: 40px;
+          margin-top: 40px;
+     }
+
+     .btn_confirm a {
+          border: none;
+          padding: 10px 20px;
+          font-size: 18px;
+          background-color: #ffc107;
+          border-radius: 10px;
+          text-decoration: none;
+          color: black;
+     }
+</style>
+<div class="p-5">
+     <h2 class="text-center mt-[50px]">Chi tiết hóa đơn</h2>
+     <div>
+          <div><b>Mã hóa đơn: </b>{{data.bills1.id}}</div>
+          <div><b>Họ và tên: </b> {{data.bills1.fullname}}</div>
+          <div><b>Số điện thoại:</b> {{data.bills1.phone_number}}</div>
+          <div><b>Địa chỉ:</b> {{data.bills1.address}}</div>
+     </div>
+
+     <div>
+          <table class="table table-hover table-bordered mt-4" id="sampleTable">
+               <thead>
+                    <tr>
+                         <th>Mã sản phẩm</th>
+                         <th>Tên sản phẩm</th>
+                         <th>Ảnh</th>
+                         <th>Size</th>
+                         <th>Số lượng</th>
+                         <th>Giá tiền</th>
+                         <th>Thành tiền</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    {{#each data.bills2}}
+                    <tr>
+                         <td>{{this.id}}</td>
+                         <td>{{this.product.name}}</td>
+                         <td><img src="/upload/{{this.product.img}}" alt="" width="100px;" /></td>
+                         <td>{{this.size}}</td>
+                         <td>{{this.amout}}</td>
+                         <td>{{formatMoney this.product.price}} đ</td>
+                         <td>{{formatMoney (nhan this.product.price this.amout)}} đ</td>
+
+                    </tr>
+                    {{/each}}
+
+               </tbody>
+               <td style="text-align:right " colspan="7">
+                    <b style="margin-right:30px">Tổng tiền cần thanh toán : {{formatMoney
+                         data.bills1.total_money}} đ</b>
+               </td>
+          </table>
+
+          <div class="btn_confirm"> <a href="/admin/table-bill">Xác nhận</a></div>
+     </div>
+</div>

@@ -1,0 +1,41 @@
+<style>
+     #status {
+          padding: 10px 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+     }
+
+     #status option {
+          color: black;
+          font-size: 18px;
+
+     }
+
+     .btn_confirm {
+          margin-top: 50px;
+          border: none;
+          padding: 10px 20px;
+          background-color: aqua;
+     }
+</style>
+
+<div>
+
+     <form method="post" action="/admin/edit-bill/{{bill.id}}?_method=PUT">
+          <label for="mySelect">chọn trạng thái :</label>
+          <select class="mt-[40px]" name="status" id="status">
+               <option style="background-color: #FFC008;" value="đang vận chuyển">đang vận chuyển</option>
+               <option style="background-color: #198754;" value="đã giao">đã giao</option>
+               <option style="background-color: #DC3545;" value="đã hủy">đã hủy</option>
+          </select>
+
+          <input class="btn_confirm" type="submit" value="xác nhận">
+     </form>
+
+
+</div>
+
+<script>
+
+</script>

@@ -57,6 +57,19 @@ app.engine(".hbs", (0, express_handlebars_1.engine)({
         json: function (value, options) {
             return JSON.stringify(value);
         },
+        nhan(a, b) {
+            return a * b;
+        },
+        formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+            decimalCount = Math.abs(decimalCount);
+            decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+            const negativeSign = amount < 0 ? "-" : "";
+            let i = parseInt(Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+            let j = i.length > 3 ? i.length % 3 : 0;
+            return (negativeSign +
+                (j ? i.substr(0, j) + thousands : "") +
+                i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands));
+        },
     },
 }));
 app.set("view engine", ".hbs");
