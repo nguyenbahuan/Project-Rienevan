@@ -17,6 +17,8 @@ class cartController {
         bill.total_money = req.body.total_money;
         bill.address = req.body.address;
         bill.status = "đang xử lý";
+        bill.oder_date = new Date();
+        bill.created_at = new Date();
         const saveBIlls = await billReRepository.save(bill);
         const billId = saveBIlls.id;
         // res.json(billId);

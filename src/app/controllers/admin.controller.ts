@@ -4,21 +4,54 @@ import { Chart } from "chart.js";
 import { Test } from "../models/test.entity";
 import { Categories } from "../models/categories.entity";
 import { Products } from "../models/products.entity";
+import { User } from "../models/user.entity";
 import slugify from "slugify";
+import { Bills } from "../models/bills.entity";
+import { DetailsProduct } from "../models/detail_productsordered.entity";
+import { time } from "console";
 ("../models/Test");
 const categoryRepository = MysqlDataSource.getRepository(Categories);
 const productsRepository = MysqlDataSource.getRepository(Products);
+const usersRepository = MysqlDataSource.getRepository(User);
+const billsRepository = MysqlDataSource.getRepository(Bills);
 class adminController {
   async controller(req: Request, res: Response, next: NextFunction) {
     const products = await MysqlDataSource.manager.find(Products);
+    const bills = await MysqlDataSource.manager.find(Bills);
+    const billsUser = await billsRepository
+      .createQueryBuilder()
+      .groupBy("bills.phone_number")
+      .getMany();
+    console.log(billsUser);
+    const users = await usersRepository
+      .createQueryBuilder("users")
+      .leftJoinAndSelect("users.role", "roles")
+      .where("roles.role = :role", { role: "customer" })
+      .getMany();
 
-    const data = {
+    let arrProductsName: any = [];
+    let productsAmout: any = [];
+    let totalProducts: number = 0;
+    if (products) {
+      products.forEach((product) => {
+        // const name = product.name.replace('3', '2')
+        arrProductsName.push(product.name);
+        productsAmout.push(product.amout);
+        totalProducts += product.amout;
+      });
+    }
+
+    res.render("admin/admin", {
       title: "Bảng điều khiển",
       layout: "admin",
-      products: products,
-    };
-    // res.json(data);
-    res.render("admin/admin", data);
+      productsName: arrProductsName,
+      productsAmout: productsAmout,
+      totalProducts: totalProducts,
+      totalUsers: billsUser.length,
+      totalBills: bills.length,
+      bills: bills,
+      users: billsUser,
+    });
   }
 
   async products(req: Request, res: Response, next: NextFunction) {
@@ -228,6 +261,53 @@ class adminController {
       .where("id = :id", { id: req.query.id })
       .execute();
     res.redirect("/admin/categories");
+  }
+
+  async statistical(req: Request, res: Response, next: NextFunction) {
+    let totalPrice = 0;
+    let totalProducts = 0;
+    let totalProductsBill = 0;
+
+    const VND = new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+
+    const products = await MysqlDataSource.manager.find(Products);
+
+    products.forEach((product) => (totalProducts += product.amout));
+
+    const detail = await MysqlDataSource.getRepository(DetailsProduct)
+      .createQueryBuilder("details_product")
+      .leftJoinAndSelect("details_product.bills", "bills")
+      .groupBy("bills.id")
+      .where("bills.status = 'đã giao'")
+      .getMany();
+    console.log("////////////", detail);
+    const bills = await billsRepository
+      .createQueryBuilder()
+      .where("bills.status = 'đã hủy'")
+      .getMany();
+
+    detail.forEach((item) => {
+      totalProductsBill += item.amout;
+    });
+
+    detail.forEach((bills) => {
+      totalPrice += bills.bills.total_money;
+      // totalProducts += bills.
+    });
+    // console.log("/////////////", bills);
+    res.render("admin/thongke", {
+      title: "Thống kê",
+      layout: "admin",
+      bills: detail,
+      totalPrice: VND.format(totalPrice),
+      totalBills: detail.length,
+      totalProductsBill: totalProductsBill,
+      totalProducts: totalProducts,
+      totalHuy: bills.length,
+    });
   }
 }
 
