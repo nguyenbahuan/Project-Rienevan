@@ -9,46 +9,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Blog = void 0;
+exports.DetailsProduct = void 0;
 const typeorm_1 = require("typeorm");
-let Blog = class Blog extends typeorm_1.BaseEntity {
+const products_entity_1 = require("./products.entity");
+const bills_entity_1 = require("./bills.entity");
+let DetailsProduct = class DetailsProduct extends typeorm_1.BaseEntity {
     id;
-    title;
-    author;
-    content;
-    img;
+    amout;
+    size;
+    product;
+    bills;
     created_at;
     updated_at;
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Blog.prototype, "id", void 0);
+], DetailsProduct.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], DetailsProduct.prototype, "amout", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "title", void 0);
+], DetailsProduct.prototype, "size", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Blog.prototype, "author", void 0);
+    (0, typeorm_1.ManyToOne)(() => products_entity_1.Products, (product) => product.details),
+    __metadata("design:type", products_entity_1.Products)
+], DetailsProduct.prototype, "product", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Blog.prototype, "content", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Blog.prototype, "img", void 0);
+    (0, typeorm_1.ManyToOne)(() => bills_entity_1.Bills, (bills) => bills.details),
+    __metadata("design:type", bills_entity_1.Bills)
+], DetailsProduct.prototype, "bills", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Blog.prototype, "created_at", void 0);
+], DetailsProduct.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Blog.prototype, "updated_at", void 0);
-Blog = __decorate([
+], DetailsProduct.prototype, "updated_at", void 0);
+DetailsProduct = __decorate([
     (0, typeorm_1.Entity)()
-], Blog);
-exports.Blog = Blog;
+], DetailsProduct);
+exports.DetailsProduct = DetailsProduct;

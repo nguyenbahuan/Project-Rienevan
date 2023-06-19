@@ -1,0 +1,96 @@
+
+
+<div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách bài viết </b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                <h1 style="color:black">News</h1>
+                    <div class="tile-body">
+                            <div class="listBlogs-content">
+                                    {{#each blogs}}
+                                    <div class="list-article-content blog-posts">
+                                        <article class="article-loop  article_loopfirst ">
+                                            <div class="article-inner">
+                                                <div class="article-image">
+                                                    <a href="">
+                                                        <img class="lazyloaded" src="/upload/{{this.img}}" alt="width=100px;">
+                                                    </a>
+                                                  </div>
+                                                <div class="article-detail">
+                                                    <div class="article-title">
+                                                        <h3>{{this.title}}</h3>
+                                                    </div>
+                                                    <p class="content">{{this.content}}</p>
+                                                    <div class="article-post-meta">
+                                                        <span class="author">bởi:    {{this.author}}</span>
+                                                    </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                {{/each}}
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<style>
+    .article-post-meta{
+        padding-top: 10px;
+    }
+    .article-title{
+        font-size: 20px;
+        padding-bottom: 10px;
+    }
+    .article-inner{
+        color:black;
+    }
+    .tile{
+        padding-right: 5%;
+    }
+    h1{
+        padding-top: 30px;
+        font-size: 30px;
+    }
+    .deleteupdate{
+        width: 5%;
+    }
+    a.btn.btn-primary.btn-sm.trash {
+        height: 25px;
+    }   
+    input[type="submit"] {
+    margin: -20px;
+    opacity: 0;
+    }
+    .article-image{
+        width: 32%;
+    }
+    .article-detail{
+        padding-left:3% ;
+        width: 59%;
+        padding-right: 2%;
+    }
+    .lazyloaded{
+        width: 100%;
+    }
+    .article-loop .article-inner {
+    background: #ffffff;
+    padding: 20px 0;
+    border-top: 1px solid #ebecf0;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+}
+</style>
+                            

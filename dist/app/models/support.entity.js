@@ -9,46 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Blog = void 0;
+exports.FeedBack = void 0;
 const typeorm_1 = require("typeorm");
-let Blog = class Blog extends typeorm_1.BaseEntity {
+let FeedBack = class FeedBack extends typeorm_1.BaseEntity {
     id;
-    title;
-    author;
+    name;
+    email;
+    phoneNumber;
     content;
-    img;
     created_at;
-    updated_at;
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Blog.prototype, "id", void 0);
+], FeedBack.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "title", void 0);
+], FeedBack.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "author", void 0);
+], FeedBack.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "content", void 0);
+], FeedBack.prototype, "phoneNumber", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "img", void 0);
+], FeedBack.prototype, "content", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Blog.prototype, "created_at", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Blog.prototype, "updated_at", void 0);
-Blog = __decorate([
+], FeedBack.prototype, "created_at", void 0);
+FeedBack = __decorate([
     (0, typeorm_1.Entity)()
-], Blog);
-exports.Blog = Blog;
+], FeedBack);
+exports.FeedBack = FeedBack;

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../config/db"));
 const blog_entity_1 = require("../models/blog.entity");
+("../models/Test");
 class blogController {
     async blogs(req, res, next) {
         const results = await db_1.default.manager
@@ -13,18 +14,6 @@ class blogController {
             res.render("blogs/table-data-blog", {
                 title: "Admin",
                 layout: "admin",
-                blogs: blog,
-            });
-        })
-            .catch(next);
-    }
-    async blog(req, res, next) {
-        const results = await db_1.default.manager
-            .find(blog_entity_1.Blog)
-            .then((blog) => {
-            res.render("blogs/news", {
-                title: "News",
-                layout: "main",
                 blogs: blog,
             });
         })
@@ -61,7 +50,7 @@ class blogController {
             content: req.body.content,
             img: req.file?.filename || req.body.imgUpload
         })
-            .where("blog.id = :id", { id: req.query.id })
+            .where("blogs.id = :id", { id: req.query.id })
             .execute();
         res.redirect('/admin/blogs');
     }
@@ -76,7 +65,7 @@ class blogController {
     async viewupdateBlog(req, res, next) {
         const blog = db_1.default.getRepository(blog_entity_1.Blog)
             .createQueryBuilder('blog')
-            .where('blog.id = :id', {
+            .where('blogs.id = :id', {
             id: req.query.id,
         })
             .getOne()

@@ -9,46 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Blog = void 0;
+exports.Test = void 0;
 const typeorm_1 = require("typeorm");
-let Blog = class Blog extends typeorm_1.BaseEntity {
+let Test = class Test {
     id;
-    title;
-    author;
-    content;
-    img;
-    created_at;
-    updated_at;
+    firstName;
+    lastName;
+    age;
 };
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
+    __metadata("design:type", String)
+], Test.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Test.prototype, "firstName", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Test.prototype, "lastName", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Blog.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Blog.prototype, "title", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Blog.prototype, "author", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Blog.prototype, "content", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Blog.prototype, "img", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Blog.prototype, "created_at", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Blog.prototype, "updated_at", void 0);
-Blog = __decorate([
+], Test.prototype, "age", void 0);
+Test = __decorate([
     (0, typeorm_1.Entity)()
-], Blog);
-exports.Blog = Blog;
+], Test);
+exports.Test = Test;

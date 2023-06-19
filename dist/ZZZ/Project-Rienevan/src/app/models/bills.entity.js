@@ -9,46 +9,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Blog = void 0;
+exports.Bills = void 0;
 const typeorm_1 = require("typeorm");
-let Blog = class Blog extends typeorm_1.BaseEntity {
+const detail_productsordered_entity_1 = require("./detail_productsordered.entity");
+const user_entity_1 = require("./user.entity");
+let Bills = class Bills extends typeorm_1.BaseEntity {
     id;
-    title;
-    author;
-    content;
-    img;
+    fullname;
+    phone_number;
+    address;
+    status;
+    oder_date;
     created_at;
     updated_at;
+    total_money;
+    details;
+    user;
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Blog.prototype, "id", void 0);
+], Bills.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "title", void 0);
+], Bills.prototype, "fullname", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "author", void 0);
+], Bills.prototype, "phone_number", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "content", void 0);
+], Bills.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Blog.prototype, "img", void 0);
+], Bills.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Blog.prototype, "created_at", void 0);
+], Bills.prototype, "oder_date", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Blog.prototype, "updated_at", void 0);
-Blog = __decorate([
+], Bills.prototype, "created_at", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], Bills.prototype, "updated_at", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Bills.prototype, "total_money", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => detail_productsordered_entity_1.DetailsProduct, (detailsProduct) => detailsProduct.bills),
+    __metadata("design:type", Array)
+], Bills.prototype, "details", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.bill),
+    __metadata("design:type", Array)
+], Bills.prototype, "user", void 0);
+Bills = __decorate([
     (0, typeorm_1.Entity)()
-], Blog);
-exports.Blog = Blog;
+], Bills);
+exports.Bills = Bills;
