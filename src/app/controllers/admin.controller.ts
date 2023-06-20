@@ -284,6 +284,8 @@ class adminController {
       .where("bills.status = 'đã giao'")
       .getMany();
     console.log("////////////", detail);
+
+    // res.json(detail);
     const bills = await billsRepository
       .createQueryBuilder()
       .where("bills.status = 'đã hủy'")
@@ -297,11 +299,23 @@ class adminController {
       totalPrice += bills.bills.total_money;
       // totalProducts += bills.
     });
+
+    // const products = await MysqlDataSource.manager.find(Products);
+    let arrProductsName: any = [];
+    let productsAmout: any = [];
+    if (products) {
+      products.forEach((product) => {
+        arrProductsName.push(product.name);
+        productsAmout.push(product.amout);
+      });
+    }
     // console.log("/////////////", bills);
     res.render("admin/thongke", {
       title: "Thống kê",
       layout: "admin",
       bills: detail,
+      productsName: arrProductsName,
+      productsAmout: productsAmout,
       totalPrice: VND.format(totalPrice),
       totalBills: detail.length,
       totalProductsBill: totalProductsBill,

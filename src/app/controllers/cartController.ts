@@ -22,24 +22,43 @@ class cartController {
     const saveBIlls = await billReRepository.save(bill);
 
     const billId = saveBIlls.id;
-
-    // res.json(billId);
     let a = req.body.IdProduct;
-    for (let i = 0; i < a.length; i++) {
+
+    if (typeof a == "string") {
       const detailProduct = await new DetailsProduct();
       const product = await new Products();
       bill.id = billId;
       detailProduct.bills = bill;
-      product.id = req.body.IdProduct[i];
+      product.id = req.body.IdProduct;
       detailProduct.product = product;
-      detailProduct.amout = req.body.productAmount[i];
-      detailProduct.size = req.body.productSize[i];
+      detailProduct.amout = req.body.productAmount;
+      detailProduct.size = req.body.productSize;
       detailProduct
         .save()
         .then(() => {
           res.redirect("cart/bill");
         })
         .catch(next);
+    }
+
+    if (typeof a == "object") {
+      // res.json(typeof a);
+      for (let i = 0; i < a.length; i++) {
+        const detailProduct = await new DetailsProduct();
+        const product = await new Products();
+        bill.id = billId;
+        detailProduct.bills = bill;
+        product.id = req.body.IdProduct[i];
+        detailProduct.product = product;
+        detailProduct.amout = req.body.productAmount[i];
+        detailProduct.size = req.body.productSize[i];
+        detailProduct
+          .save()
+          .then(() => {
+            res.redirect("cart/bill");
+          })
+          .catch(next);
+      }
     }
   }
 }

@@ -1,3 +1,9 @@
+<style>
+     .status {
+          border-radius: 5px;
+          padding: 5px 10px;
+     }
+</style>
 <div class="app-title">
      <ul class="app-breadcrumb breadcrumb side">
           <li class="breadcrumb-item active"><a href="#"><b>danh sách hóa đơn</b></a></li>
@@ -26,7 +32,7 @@
                                    <td>{{this.fullname}}</td>
                                    <td>{{this.phone_number}}</td>
                                    <td>{{this.address}}</td>
-                                   <td class="status"> {{this.status}} </td>
+                                   <td> <span class="status">{{this.status}}</span> </td>
 
                                    <td>{{formatMoney this.total_money}} đ</td>
                                    <td>

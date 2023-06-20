@@ -29,13 +29,14 @@
        }
 </style>
 <div class="mt-[100px] px-[50px] ">
-       <a class="mb-4 text-xl" href="/">Trang chủ / <span style="color: #777;" class="text-lg">gio hang (9)</span></a>
+       <a class="mb-4 text-xl" href="/">Trang chủ / <span style="color: #777;" class="text-lg cart_amount2"></span></a>
        <form action="/cart" method="post">
               <div class="main flex gap-x-8 mt-4">
                      <div class="main-left w-[65%]">
                             <h2 class="text-2xl font-bold mt-3 ml-3 mb-2">Giỏ Hàng của bạn</h2>
                             <hr style="color: #777;" class="mb-3">
-                            <h2 class="text-lg mb-3">Bạn đang có <b>9 sản phẩm</b> trong giỏ hàng </h2>
+                            <h2 class="text-lg mb-3">Bạn đang có <b class="cart_amount3"></b> trong giỏ hàng
+                            </h2>
                             <div class="cart rounded border p-5">
 
                             </div>
@@ -80,6 +81,8 @@
        })
        const sumMoney = document.querySelector(".totalMoney");
        const cart_quantyti = document.querySelector(".cart_amount");
+       const cart_quantyti2 = document.querySelector(".cart_amount2");
+       const cart_quantyti3 = document.querySelector(".cart_amount3");
        const cart_container = document.querySelector(".cart");
        const sumM = document.querySelector(".sum");
        function handleAddtobill() {
@@ -88,11 +91,16 @@
        }
        function showCart() {
               let sum = 0
+              let amount = 0
               if (localStorage.getItem("cart")) {
                      //const template_cart = document.querySelector(".template_cart");
                      let storage = localStorage.getItem("cart");
                      cart = JSON.parse(storage);
                      cart.map((item, index) => {
+                            amount += item.Quantity
+
+                            cart_quantyti3.textContent = `${amount} sản phẩm`;
+                            cart_quantyti2.textContent = `gio hang (${amount})`;
                             sum += item.Quantity * item.price
                             sumM.value = sum
                             sumMoney.textContent = `${formatMoney(sum)}đ`;

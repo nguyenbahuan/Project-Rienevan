@@ -92,7 +92,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="tile">
-            <h3 class="tile-title">DỮ LIỆU HÀNG THÁNG</h3>
+            <h3 class="tile-title">THỐNG KÊ DOANH SỐ</h3>
             <div class="embed-responsive embed-responsive-16by9">
                 <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
             </div>
@@ -100,10 +100,59 @@
     </div>
     <div class="col-md-6">
         <div class="tile">
-            <h3 class="tile-title">THỐNG KÊ DOANH SỐ</h3>
+            <h3 class="tile-title">DỮ LIỆU HÀNG THÁNG</h3>
             <div class="embed-responsive embed-responsive-16by9">
                 <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
             </div>
         </div>
     </div>
 </div>
+
+{{#each productsName}}
+<input type="hidden" class="nameProduct" value="{{this}}">
+{{/each}}
+<script>
+    const nameProducts = document.querySelectorAll('.nameProduct');
+
+    let arrName = []
+    nameProducts.forEach((name) => arrName.push(name.value));
+    console.log(arrName);
+    let productsAmout = [{{ productsAmout }}]
+
+    const ctx = document.getElementById('lineChartDemo');
+    const ctx2 = document.getElementById('barChartDemo');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: arrName,
+            datasets: [{
+                label: 'Số lượng sản phẩm',
+                data: productsAmout,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const labels = ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12',];
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Doanh thu',
+                data: [65000000, 59000000, 80000000, 81000000, 56000000, 95000000, 1, 1, 1, 1, 1, 1],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        }
+    });
+</script>
