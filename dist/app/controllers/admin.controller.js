@@ -6,20 +6,51 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../../config/db"));
 const categories_entity_1 = require("../models/categories.entity");
 const products_entity_1 = require("../models/products.entity");
+const user_entity_1 = require("../models/user.entity");
 const slugify_1 = __importDefault(require("slugify"));
+const bills_entity_1 = require("../models/bills.entity");
+const detail_productsordered_entity_1 = require("../models/detail_productsordered.entity");
 ("../models/Test");
 const categoryRepository = db_1.default.getRepository(categories_entity_1.Categories);
 const productsRepository = db_1.default.getRepository(products_entity_1.Products);
+const usersRepository = db_1.default.getRepository(user_entity_1.User);
+const billsRepository = db_1.default.getRepository(bills_entity_1.Bills);
 class adminController {
     async controller(req, res, next) {
         const products = await db_1.default.manager.find(products_entity_1.Products);
-        const data = {
+        const bills = await db_1.default.manager.find(bills_entity_1.Bills);
+        const billsUser = await billsRepository
+            .createQueryBuilder()
+            .groupBy("bills.phone_number")
+            .getMany();
+        console.log(billsUser);
+        const users = await usersRepository
+            .createQueryBuilder("users")
+            .leftJoinAndSelect("users.role", "roles")
+            .where("roles.role = :role", { role: "customer" })
+            .getMany();
+        let arrProductsName = [];
+        let productsAmout = [];
+        let totalProducts = 0;
+        if (products) {
+            products.forEach((product) => {
+                // const name = product.name.replace('3', '2')
+                arrProductsName.push(product.name);
+                productsAmout.push(product.amout);
+                totalProducts += product.amout;
+            });
+        }
+        res.render("admin/admin", {
             title: "Bảng điều khiển",
             layout: "admin",
-            products: products,
-        };
-        // res.json(data);
-        res.render("admin/admin", data);
+            productsName: arrProductsName,
+            productsAmout: productsAmout,
+            totalProducts: totalProducts,
+            totalUsers: billsUser.length,
+            totalBills: bills.length,
+            bills: bills,
+            users: billsUser,
+        });
     }
     async products(req, res, next) {
         const results = await productsRepository
@@ -218,6 +249,58 @@ class adminController {
             .where("id = :id", { id: req.query.id })
             .execute();
         res.redirect("/admin/categories");
+    }
+    async statistical(req, res, next) {
+        let totalPrice = 0;
+        let totalProducts = 0;
+        let totalProductsBill = 0;
+        const VND = new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+        });
+        const products = await db_1.default.manager.find(products_entity_1.Products);
+        products.forEach((product) => (totalProducts += product.amout));
+        const detail = await db_1.default.getRepository(detail_productsordered_entity_1.DetailsProduct)
+            .createQueryBuilder("details_product")
+            .leftJoinAndSelect("details_product.bills", "bills")
+            .groupBy("bills.id")
+            .where("bills.status = 'đã giao'")
+            .getMany();
+        console.log("////////////", detail);
+        // res.json(detail);
+        const bills = await billsRepository
+            .createQueryBuilder()
+            .where("bills.status = 'đã hủy'")
+            .getMany();
+        detail.forEach((item) => {
+            totalProductsBill += item.amout;
+        });
+        detail.forEach((bills) => {
+            totalPrice += bills.bills.total_money;
+            // totalProducts += bills.
+        });
+        // const products = await MysqlDataSource.manager.find(Products);
+        let arrProductsName = [];
+        let productsAmout = [];
+        if (products) {
+            products.forEach((product) => {
+                arrProductsName.push(product.name);
+                productsAmout.push(product.amout);
+            });
+        }
+        // console.log("/////////////", bills);
+        res.render("admin/thongke", {
+            title: "Thống kê",
+            layout: "admin",
+            bills: detail,
+            productsName: arrProductsName,
+            productsAmout: productsAmout,
+            totalPrice: VND.format(totalPrice),
+            totalBills: detail.length,
+            totalProductsBill: totalProductsBill,
+            totalProducts: totalProducts,
+            totalHuy: bills.length,
+        });
     }
 }
 exports.default = new adminController();

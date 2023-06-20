@@ -11,11 +11,7 @@
         <div class="row element-button">
           <div class="col-sm-2">
 
-            <a
-              class="btn btn-add btn-sm"
-              href="/admin/products/add-product"
-              title="Thêm"
-            ><i class="fas fa-plus"></i>
+            <a class="btn btn-add btn-sm" href="/admin/products/add-product" title="Thêm"><i class="fas fa-plus"></i>
               Tạo mới sản phẩm</a>
           </div>
           <div class="col-sm-2">
@@ -39,38 +35,22 @@
           </thead>
           <tbody>
             {{#each product}}
-              <tr>
-                <td>{{this.id}}</td>
-                <td>{{this.name}}</td>
-                <td><img
-                    src="/upload/{{this.img}}"
-                    alt=""
-                    width="100px;"
-                  /></td>
-                <td>{{this.size}}</td>
-                <td>{{this.amout}}</td>
-                <td>{{checkAmount this.amout}}</td>
-                <td>{{this.price}}</td>
-                <td>{{this.categories.name}}</td>
-                <td><button
-                    class="btn btn-danger btn-sm trash"
-                    title="Xóa"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalDelete"
-                    data-bs-id="{{this.id}}"
-                  ><i class="fas fa-trash-alt"></i>
-                  </button>
-                  <a
-                    href="/admin/products/edit-product?id={{this.id}}"
-                    class="btn btn-primary btn-sm edit"
-                    type="button"
-                    title="Sửa"
-                    id="show-emp"
-                    data-toggle="modal"
-                    data-target="#ModalUP"
-                  ><i class="fas fa-edit"></i></a>
-                </td>
-              </tr>
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.name}}</td>
+              <td><img src="/upload/{{this.img}}" alt="" width="100px;" /></td>
+              <td>{{this.size}}</td>
+              <td>{{this.amout}}</td>
+              <td>{{checkAmount this.amout}}</td>
+              <td>{{this.price}}</td>
+              <td>{{this.categories.name}}</td>
+              <td><button class="btn btn-danger btn-sm trash" title="Xóa" data-bs-toggle="modal"
+                  data-bs-target="#modalDelete" data-bs-id="{{this.id}}"><i class="fas fa-trash-alt"></i>
+                </button>
+                <a href="/admin/products/edit-product?id={{this.id}}" class="btn btn-primary btn-sm edit" type="button"
+                  title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></a>
+              </td>
+            </tr>
             {{/each}}
           </tbody>
         </table>
@@ -82,40 +62,21 @@
 <!--
   MODAL
 -->
-<div
-  class="modal fade"
-  id="modalDelete"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Bạn có muốn xóa
-          không</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">Bạn có muốn xóa
+          không ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       {{! <div class="modal-body">
         ...
       </div> }}
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Hủy</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
 
-        <button
-          id="btn-delete"
-          type="button"
-          class="btn btn-danger"
-        >Xóa</button>
+        <button id="btn-delete" type="button" class="btn btn-danger">Xóa</button>
       </div>
     </div>
   </div>
@@ -124,14 +85,19 @@
 MODAL
 -->
 <script>
-  document.addEventListener("DOMContentLoaded", ()=> { var idProduct; var
-  exampleModal = document.getElementById('modalDelete'); var btnDelete =
-  document.getElementById('btn-delete'); var deleteForm =
-  document.forms['form-delete-product'];
-  exampleModal.addEventListener('show.bs.modal', event => { // Button that const
-  btn = event.relatedTarget; idProduct = btn.getAttribute('data-bs-id'); });
-  btnDelete.addEventListener('click', (event) => { deleteForm.action =
-  `/admin/products/delete-product?id=${idProduct}&_method=DELETE`;
-  deleteForm.submit(); }); });
+  document.addEventListener("DOMContentLoaded", () => {
+    var idProduct; var
+      exampleModal = document.getElementById('modalDelete'); var btnDelete =
+        document.getElementById('btn-delete'); var deleteForm =
+          document.forms['form-delete-product'];
+    exampleModal.addEventListener('show.bs.modal', event => { // Button that const
+      btn = event.relatedTarget; idProduct = btn.getAttribute('data-bs-id');
+    });
+    btnDelete.addEventListener('click', (event) => {
+      deleteForm.action =
+        `/admin/products/delete-product?id=${idProduct}&_method=DELETE`;
+      deleteForm.submit();
+    });
+  });
 
 </script>
