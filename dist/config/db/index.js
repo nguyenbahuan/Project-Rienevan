@@ -18,7 +18,7 @@ const MysqlDataSource = new typeorm_1.DataSource({
     port: 3306,
     username: "root",
     password: "",
-    database: "product",
+    database: "test1",
     entities: [
         test_entity_1.Test,
         user_entity_1.User,

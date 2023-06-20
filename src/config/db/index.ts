@@ -23,7 +23,7 @@ const MysqlDataSource = new DataSource({
   port: 3306,
   username: "root",
   password: "",
-  database: "product",
+  database: "test1",
   entities: [
     Test,
     User,

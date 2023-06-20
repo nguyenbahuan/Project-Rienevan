@@ -75,6 +75,18 @@
     </div>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", ()=> { var idCategory; var
+  exampleModal = document.getElementById('modalDelete'); var btnDelete =
+  document.getElementById('btn-delete'); var deleteForm =
+  document.forms['form-delete-category'];
+  exampleModal.addEventListener('show.bs.modal', event => { // Button that const
+  btn = event.relatedTarget; idCategory = btn.getAttribute('data-bs-id'); });
+  btnDelete.addEventListener('click', (event) => { deleteForm.action =
+  `/admin/categories/delete-category?id=${idCategory}&_method=DELETE`;
+  deleteForm.submit(); }); });
+
+</script>
 <style>
     .box-info-contact{
         padding-left: 10%;
@@ -115,7 +127,7 @@
     padding: 12px 28px;
     line-height: normal;
     color: #fff;
-    background-color: #ffc107;
+    background-color: #ffc107 !important;
     border: 1px solid #000000;
     font-size: 13px;
     font-weight: 500;

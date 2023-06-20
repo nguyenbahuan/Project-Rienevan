@@ -21,7 +21,7 @@ class FeedBackController {
         Feedback.phoneNumber = req.body.phoneNumber;
         Feedback.content = req.body.content;
         Feedback.save();
-        res.redirect('/feedback');
+        res.redirect('/support/feedback');
     }
     async feedbacks(req, res, next) {
         const results = await db_1.default.manager
